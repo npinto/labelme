@@ -3,7 +3,7 @@
 
 // annotation class
 // Keeps track of all information related to an individual
-// annotation.  
+// annotation.
 function annotation(anno_id) {
 
   // *******************************************
@@ -27,7 +27,7 @@ function annotation(anno_id) {
   this.lastx = -1;
   this.lasty = -1;
   this.CloseErrorFlag = 0;
-  
+
   // This array stores graphics objects for each control point
   this.control_points = new Array();
   this.selectedControlPoint = -1;
@@ -50,7 +50,7 @@ function annotation(anno_id) {
   this.SetObjName = function(name) {
     this.obj_name = name;
   };
-  
+
   this.GetUsername = function () {
     return this.username;
   };
@@ -124,7 +124,7 @@ function annotation(anno_id) {
     y = Math.round(y/im_ratio);
 
     // 7.31.06 - disallow making a point at x=1. move it to x=2 instead.
-    // This is because where there are points at x=1, there are lines 
+    // This is because where there are points at x=1, there are lines
     // missing.
     if(x==1) x=2;
 
@@ -151,7 +151,7 @@ function annotation(anno_id) {
     this.lastx = x;
     this.lasty = y;
   };
-  
+
   // Adds a new control point to the polygon.
   this.AddControlPoint = function (x,y) {
     if(this.CloseErrorFlag) {
@@ -162,7 +162,7 @@ function annotation(anno_id) {
     y = Math.round(y/main_image.GetImRatio());
 
     // 7.31.06 - disallow making a point at x=1. move it to x=2 instead.
-    // This is because where there are points at x=1, there are lines 
+    // This is because where there are points at x=1, there are lines
     // missing.
     if(x==1) {
       x=2;
@@ -184,7 +184,7 @@ function annotation(anno_id) {
     if(IsMicrosoft()) {
       this.all_lines[line_idx].SetAttribute('onmousedown',function() {main_handler.DrawCanvasMouseDown(window.event); return false;});
     }
-    
+
     // Move the first control point to be on top of any drawn lines.
     this.first_point.MoveToTop();
 
@@ -218,8 +218,8 @@ function annotation(anno_id) {
 			      this.getObjectColor(this.anno_id),im_ratio,this.obj_name);
 
   };
-  
-  // Draw a poly-line given this annotation's control points (i.e. 
+
+  // Draw a poly-line given this annotation's control points (i.e.
   // don't connect the last point to the first point).  This function
   // is used when we zoom.
   this.DrawPolyLine = function (im_ratio) {
@@ -302,8 +302,8 @@ function annotation(anno_id) {
     this.graphics.UnfillPolygon();
   };
 
-  // When you move the mouse over the first control point, then make it 
-  // bigger to indicate it should be clicked on.  Do this if two or more 
+  // When you move the mouse over the first control point, then make it
+  // bigger to indicate it should be clicked on.  Do this if two or more
   // lines have been drawn.
   this.MouseOverFirstPoint = function () {
     if(this.pts_x.length>=3) {
@@ -319,15 +319,15 @@ function annotation(anno_id) {
       else {
 	this.first_point.SetAttribute('onmousedown','var event=new Object(); event.button=2;main_handler.DrawCanvasMouseDown(event);');
 	this.first_point.SetAttribute('onmouseout','main_handler.MousedOutFirstControlPoint();');
-// 	this.first_point.SetAttribute('onmousedown','var event=new Object(); event.button=2;parent.main_handler.DrawCanvasMouseDown(event);');
-// 	this.first_point.SetAttribute('onmouseout','parent.main_handler.MousedOutFirstControlPoint();');
+//	this.first_point.SetAttribute('onmousedown','var event=new Object(); event.button=2;parent.main_handler.DrawCanvasMouseDown(event);');
+//	this.first_point.SetAttribute('onmouseout','parent.main_handler.MousedOutFirstControlPoint();');
       }
       this.first_point.SetAttribute('style','cursor:pointer;');
     }
   };
 
-  // When you move the mouse over the first control point, then make it 
-  // bigger to indicate it should be clicked on.  Do this if two or more 
+  // When you move the mouse over the first control point, then make it
+  // bigger to indicate it should be clicked on.  Do this if two or more
   // lines have been drawn.
   this.MouseOutFirstPoint = function () {
     var im_ratio = main_image.GetImRatio();
@@ -347,7 +347,7 @@ function annotation(anno_id) {
     }
   };
 
-  // This function shows all control points for an annotation it takes in 
+  // This function shows all control points for an annotation it takes in
   // arrays of x and y points
   this.ShowControlPoints = function () {
     var im_ratio = main_image.GetImRatio();
@@ -357,7 +357,7 @@ function annotation(anno_id) {
       this.control_points[i].DrawPoint(Math.round(this.pts_x[i]*im_ratio),Math.round(this.pts_y[i]*im_ratio),'#00ff00',5);
     }
   };
-  
+
   this.StartMoveControlPoint = function (x,y,im_ratio) {
     var i = this.getNearestControlPoint(x,y,im_ratio);
     if(i>=0) {
@@ -414,15 +414,15 @@ function annotation(anno_id) {
     }
     this.center_x = Math.round(im_ratio*(dx+this.center_x));
     this.center_y = Math.round(im_ratio*(dy+this.center_y));
-    
+
     // Adjust polygon:
     this.graphics.ClearDrawing();
     this.DrawPolygon(im_ratio);
-    
+
     // Adjust control points:
     this.RemoveControlPoints();
     this.ShowControlPoints();
-    
+
     this.RemoveCenterOfMass();
     this.ShowCenterOfMass(im_ratio);
   };
@@ -451,12 +451,12 @@ function annotation(anno_id) {
     for(i=1; i < length; i++) {
       mdpts_x[i-1] = Math.round((x[i-1] + x[i])/2);
       mdpts_y[i-1] = Math.round((y[i-1] + y[i])/2);
-      lengths[i-1] = Math.round(Math.sqrt(Math.pow(x[i-1] - x[i], 2) + 
+      lengths[i-1] = Math.round(Math.sqrt(Math.pow(x[i-1] - x[i], 2) +
 					  Math.pow(y[i-1] - y[i], 2)));
     }
     mdpts_x[length - 1] = Math.round((x[0] + x[length - 1])/2);
     mdpts_y[length - 1] = Math.round((y[0] + y[length - 1])/2);
-    lengths[i-1] = Math.round(Math.sqrt(Math.pow(x[0] - x[length - 1], 2) + 
+    lengths[i-1] = Math.round(Math.sqrt(Math.pow(x[0] - x[length - 1], 2) +
 					Math.pow(y[0] - y[length - 1], 2)));
 
     var sumlengths = 0;
@@ -488,7 +488,7 @@ function annotation(anno_id) {
     this.center_point.DrawPoint(Math.round(this.center_x*im_ratio),
 				Math.round(this.center_y*im_ratio),'red',8);
   };
-  
+
   // This function removes the middle grab point for a polygon
   this.RemoveCenterOfMass = function() {
     if(this.center_point) {
@@ -506,7 +506,7 @@ function annotation(anno_id) {
     return pt;
   };
 
-  // Returns the closest point to (x,y) that lies along the boundary of 
+  // Returns the closest point to (x,y) that lies along the boundary of
   // the polygon.
   this.ClosestPoint = function (x,y) {
     var eps = 1e-3;
@@ -577,7 +577,7 @@ function annotation(anno_id) {
       this.control_points = null;
     }
   };
-   
+
   this.charCodeAt = function (text,position) {
     var tmp = text.substring(position,position+1);
     for(var i=1;i<=255;i++) if(unescape('%'+i.toString(16)) == tmp) return i;
@@ -607,7 +607,7 @@ function annotation(anno_id) {
     objectColors[13] = "999900"; // bad
 
     // case insensative hashing:
-    var name = this.obj_name.toUpperCase(); 
+    var name = this.obj_name.toUpperCase();
     var hash = 0;
     for(var i=0;i<name.length;i++) { //hash code based on name
       hash += this.charCodeAt(name,i);

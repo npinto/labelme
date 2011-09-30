@@ -2,7 +2,7 @@
 // Updated: 10/19/2006
 
 // handler
-// Handles all of the user's actions and delegates tasks to other classes.  
+// Handles all of the user's actions and delegates tasks to other classes.
 // Also keeps track of global information.
 var REST_CANVAS = 1;
 var DRAW_CANVAS = 2;
@@ -20,7 +20,7 @@ function handler() {
   // Public methods:
   // *******************************************
 
-  // Handles when the user presses the delete button in response to 
+  // Handles when the user presses the delete button in response to
   // the "What is this object?" popup bubble.
   this.WhatIsThisObjectDeleteButton = function () {
     WriteLogMsg('*Deleting_object');
@@ -31,7 +31,7 @@ function handler() {
     this.QueryToRest();
   };
 
-  // Handles when the user presses the undo close button in response to 
+  // Handles when the user presses the undo close button in response to
   // the "What is this object?" popup bubble.
   this.WhatIsThisObjectUndoCloseButton = function () {
     this.active_canvas = DRAW_CANVAS;
@@ -73,8 +73,8 @@ function handler() {
     }
     main_canvas.SubmitAnnotations(editedControlPoints);
   };
-  
-  // Handles when the user presses the delete button in response to 
+
+  // Handles when the user presses the delete button in response to
   // the edit popup bubble.
   this.EditBubbleDeleteButton = function () {
     main_select_canvas.DeleteAnnotation();
@@ -91,25 +91,25 @@ function handler() {
     if(main_image.GetFileInfo().GetMode() == 'v') return true;
     else return false;
   };
-  
+
   this.IsPictureMode = function(){
     var m = main_image.GetFileInfo().GetMode();
     return ((m=='i') || (m=='c') || (m=='f') || (m=='im') || (m='mt'));
   };
 
-  // Handles when the user presses the zoom "plus" (in) button.  Zooms in on 
+  // Handles when the user presses the zoom "plus" (in) button.  Zooms in on
   // the image by amt percent.
   this.ZoomPlus = function (amt) {
     main_image.Zoom(amt);
   };
 
-  // Handles when the user presses the zoom "minux" (out) button.  Zooms out 
+  // Handles when the user presses the zoom "minux" (out) button.  Zooms out
   // on the image by amt percent.
   this.ZoomMinus = function (amt) {
     main_image.Zoom(amt);
   };
 
-  // Handles when the user presses on the "Fit Image" link.  The result is 
+  // Handles when the user presses on the "Fit Image" link.  The result is
   // that the displayed image fits nicely onto the page (no scrollbars).
   this.ZoomFitImage = function () {
     main_image.Zoom('fitted');
@@ -134,7 +134,7 @@ function handler() {
     if(this.active_canvas!=SELECTED_CANVAS) main_canvas.unselectObjects();
   };
 
-  // Handles when the user moves the mouse over a polygon on the drawing 
+  // Handles when the user moves the mouse over a polygon on the drawing
   // canvas.
   this.CanvasMouseMove = function (event,pp) {
     var x = GetEventPosX(event);
@@ -163,7 +163,7 @@ function handler() {
     main_draw_canvas.AddAnnotation(x,y,main_canvas.GetAnnotations().length);
   };
 
-  // Handles when the user presses the mouse button down on the drawing 
+  // Handles when the user presses the mouse button down on the drawing
   // canvas.
   this.DrawCanvasMouseDown = function (event) {
     if(this.active_canvas!=DRAW_CANVAS) return;
@@ -195,9 +195,9 @@ function handler() {
     main_draw_canvas.DetachAnnotation();
   };
 
-  // Submits the object label in response to the "What is this object?" 
+  // Submits the object label in response to the "What is this object?"
   // popup bubble.
-  this.SubmitQuery = function () { 
+  this.SubmitQuery = function () {
     var nn = RemoveSpecialChars(document.getElementById('objEnter').value);
     var re = /[a-zA-Z0-9]/;
     if(!re.test(nn)) {
@@ -273,7 +273,7 @@ function handler() {
     anno.FillPolygon();
   };
 
-  // Handles when the user presses the mouse button down on the selected 
+  // Handles when the user presses the mouse button down on the selected
   // canvas.
   this.SelectedCanvasMouseDown = function (event) {
     if(main_select_canvas.isEditingControlPoint || main_select_canvas.isMovingCenterOfMass) {
@@ -287,7 +287,7 @@ function handler() {
     main_select_canvas.MouseDown(x,y,button);
   };
 
-  // Handles when the user moves the mouse button over the selected 
+  // Handles when the user moves the mouse button over the selected
   // canvas.
   this.SelectedCanvasMouseMove = function (event) {
     if(this.active_canvas==SELECTED_CANVAS) {
@@ -299,7 +299,7 @@ function handler() {
     }
   };
 
-  // Handles when the user releases the mouse button on the selected 
+  // Handles when the user releases the mouse button on the selected
   // canvas.
   this.SelectedCanvasMouseUp = function (event) {
     var x = GetEventPosX(event);
@@ -369,7 +369,7 @@ function handler() {
     main_draw_canvas.GetAnnotation().MouseOutFirstPoint();
   };
 
-//mouse over 
+//mouse over
 this.frameOver = function(index, top){
   tframe = document.getElementById("frame"+index);
   tframe.style.zIndex = top+1;
@@ -390,7 +390,7 @@ this.frameClick = function(index){
   main_image.SetNewImage(LoadAnnotations(file_info.GetFullName()));
   main_video.setFrame(index);
 }
-  
+
 //handle + and - on framebar
 this.taskPlus = function(){
   main_frameBar.task(1.2);
@@ -401,39 +401,39 @@ this.taskMinus = function(){
 }
 
 this.adjustPoint = function(event){
-	main_player.adjustPoint(event);	
+	main_player.adjustPoint(event);
 }
 
 this.onTop = function(id) {
 	windowObj.elNode = document.getElementById(id);
 	windowObj.elNode.style.visibility= 'visible';
-  	windowObj.elNode.style.zIndex = ++windowObj.zIndex;  
-  	if(id == "toolbar"){
-    	tdiv = document.getElementById("framebar");
-    	tdiv.style.overflowX = "visible";
-  	}
+	windowObj.elNode.style.zIndex = ++windowObj.zIndex;
+	if(id == "toolbar"){
+	tdiv = document.getElementById("framebar");
+	tdiv.style.overflowX = "visible";
+	}
 }
 
 //hide the window
 this.hideWindow = function(id) {
 	windowObj.elNode = document.getElementById(id);
-  	windowObj.elNode.style.visibility= 'hidden';
-  	if(id == "toolbar"){
-   		tdiv = document.getElementById("framebar");
-    	tdiv.style.overflowX = "hidden";
-  	}
+	windowObj.elNode.style.visibility= 'hidden';
+	if(id == "toolbar"){
+		tdiv = document.getElementById("framebar");
+	tdiv.style.overflowX = "hidden";
+	}
 }
 
 this.dragWindowStart = function(event, id) {
 	var el, x, y;
 	if(id){
-    	windowObj.elNode = document.getElementById(id);
-  	}else{  
-    	windowObj.elNode = event.target;
-    	if (windowObj.elNode.nodeType == 3){
+	windowObj.elNode = document.getElementById(id);
+	}else{
+	windowObj.elNode = event.target;
+	if (windowObj.elNode.nodeType == 3){
 			windowObj.elNode = windowObj.elNode.parentNode;
 		}
-  	}
+	}
 
     x = event.clientX + window.scrollX;
     y = event.clientY + window.scrollY;
@@ -441,9 +441,9 @@ this.dragWindowStart = function(event, id) {
     windowObj.cursorStartY = y;
     windowObj.elStartLeft = parseInt(windowObj.elNode.style.left, 10);
     windowObj.elStartTop = parseInt(windowObj.elNode.style.top,  10);
-  	if (isNaN(windowObj.elStartTop))  windowObj.elStartTop  = 0;
+	if (isNaN(windowObj.elStartTop))  windowObj.elStartTop  = 0;
 	if (isNaN(windowObj.elStartLeft)) windowObj.elStartLeft = 0;
-  
+
 	windowObj.elNode.style.zIndex = ++windowObj.zIndex;
 	document.addEventListener("mousemove", this.dragWindowGo,   true);
 
@@ -455,14 +455,14 @@ this.dragWindowGo = function(event) {
 	var x, y;
 
     x = event.clientX + window.scrollX;
-    y = event.clientY + window.scrollY;    
+    y = event.clientY + window.scrollY;
 	windowObj.elNode.style.left = (windowObj.elStartLeft + x - windowObj.cursorStartX) + "px";
     windowObj.elNode.style.top  = (windowObj.elStartTop  + y - windowObj.cursorStartY) + "px";
-	
+
 	event.preventDefault();
 }
 
-this.dragWindowStop = function(event) { 
+this.dragWindowStop = function(event) {
 	document.removeEventListener("mousemove", this.dragWindowGo,   true);
 }
 

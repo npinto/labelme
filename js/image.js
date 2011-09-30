@@ -76,7 +76,7 @@ function image(id) {
   // Sets the dimensions of the image based on browser setup.
   this.SetImageDimensions = function() {
     this.SetOrigImDims(this.im);
-    var avail_width = this.GetAvailWidth();    
+    var avail_width = this.GetAvailWidth();
     var avail_height = this.GetAvailHeight();
     var width_ratio = avail_width/this.width_orig;
     var height_ratio = avail_height/this.height_orig;
@@ -87,7 +87,7 @@ function image(id) {
 
     this.width_curr = Math.round(this.im_ratio*this.width_orig);
     this.height_curr = Math.round(this.im_ratio*this.height_orig);
-    
+
     this.im.width = this.width_curr;
     this.im.height = this.height_curr;
 
@@ -141,9 +141,9 @@ function image(id) {
       document.getElementById('main_image').style.overflow = 'auto';
     }
   };
-  
+
   // Zoom the image given a zoom level (amt) between 0 and 1 (or 'fitted').
-  this.Zoom = function(amt) { 
+  this.Zoom = function(amt) {
     switch(amt) {
       case 'fitted':
       amt = this.browser_im_ratio;
@@ -168,7 +168,7 @@ function image(id) {
 
     this.ScaleFrame();
 
-    // Remove unnecessary scrollbars if in "fitted" view (this is mostly 
+    // Remove unnecessary scrollbars if in "fitted" view (this is mostly
     // an IE bug fix).
     var mainImage = document.getElementById('main_image');
     if(this.im_ratio.toFixed(5) == this.browser_im_ratio.toFixed(5)) {
@@ -210,30 +210,30 @@ function image(id) {
     main_select_canvas.RedrawAnnotation();
   };
 
-  
+
   // *******************************************
   // Private methods:
   // *******************************************
 
-  //tells the picture to take up the available 
-  //space in the browser, if it needs it. 6.29.06 
+  //tells the picture to take up the available
+  //space in the browser, if it needs it. 6.29.06
   this.ScaleFrame = function() {
     var mainImage = document.getElementById('main_image');
     //look at the available browser height and the image height,
     //and use the smaller of the two for the main_image height.
     var avail_height = this.GetAvailHeight();
     if(this.height_curr > avail_height) this.curr_frame_height = avail_height;
-    else this.curr_frame_height = this.height_curr;	 
+    else this.curr_frame_height = this.height_curr;
     //likewise for width
     var avail_width = this.GetAvailWidth();
     if(this.width_curr > avail_width) this.curr_frame_width = avail_width;
     else this.curr_frame_width = this.width_curr;
-    
+
     mainImage.style.width = this.curr_frame_width + 'px';
-    mainImage.style.height = this.curr_frame_height + 'px';  
-    
+    mainImage.style.height = this.curr_frame_height + 'px';
+
   };
-  
+
   /*  //6.14.06 - center the zoomed image over a specified point on the image.
        this.center_point = function(x,y) {
        var horiz_middle = Math.round(this.curr_frame_width / 2);
@@ -248,7 +248,7 @@ function image(id) {
        //and not the top left corner.
        //(useful for many things)
        };  */
-  
+
   // Retrieves and sets the original image's dimensions (width/height).
 
   this.SetOrigImDims = function (im) {
@@ -279,7 +279,7 @@ function image(id) {
 
     if(IsNetscape() || IsSafari()){
       if(main_handler.IsMovieMode()){
-	return window.innerHeight - (bot_height+top_height) +4;      
+	return window.innerHeight - (bot_height+top_height) +4;
       }
       else if(main_handler.IsPictureMode()){
 	return window.innerHeight - top_height - 8;
@@ -304,10 +304,10 @@ function image(id) {
   this.IsPointVisible = function (x,y) {
     var scrollLeft = document.getElementById('main_image').scrollLeft;
     var scrollTop = document.getElementById('main_image').scrollTop;
-    if(((x*this.im_ratio < scrollLeft) || 
-	(x*this.im_ratio - scrollLeft > this.curr_frame_width - 160)) || 
-       ((y*this.im_ratio < scrollTop) || 
-	(y*this.im_ratio - scrollTop > this.curr_frame_height))) 
+    if(((x*this.im_ratio < scrollLeft) ||
+	(x*this.im_ratio - scrollLeft > this.curr_frame_width - 160)) ||
+       ((y*this.im_ratio < scrollTop) ||
+	(y*this.im_ratio - scrollTop > this.curr_frame_height)))
       return false;  //the 160 is about the width of the right-side div
     return true;
   };

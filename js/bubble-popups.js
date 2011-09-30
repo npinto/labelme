@@ -9,7 +9,7 @@
   // Public methods:
   // *******************************************
 
-function mkPopup(left,top) { 
+function mkPopup(left,top) {
   wait_for_input = 1;
   var html_str = mkBubbleHTML(left,top,'query');
   InsertAfterDiv(html_str,'main_section');
@@ -19,14 +19,14 @@ function mkPopup(left,top) {
  }
 
 function CloseQueryPopup() {
-  wait_for_input = 0;  
+  wait_for_input = 0;
   var p = document.getElementById('myPopup');
   p.parentNode.removeChild(p);
 }
 
 function mkEditPopup(left,top,obj_name) {
   edit_popup_open = 1;
-  var html_str = mkBubbleHTML(left,top,'edit',obj_name);  
+  var html_str = mkBubbleHTML(left,top,'edit',obj_name);
   InsertAfterDiv(html_str,'main_section');
   document.getElementById('objEnter').focus();
   document.getElementById('objEnter').select();
@@ -34,7 +34,7 @@ function mkEditPopup(left,top,obj_name) {
 
 function mkVerifiedPopup(left,top) {
   edit_popup_open = 1;
-  var html_str = mkBubbleHTML(left,top,'verified');  
+  var html_str = mkBubbleHTML(left,top,'verified');
   InsertAfterDiv(html_str,'main_section');
 }
 
@@ -49,21 +49,21 @@ function CloseEditPopup() {
   // *******************************************
 
 function mkBubbleHTML(left,top,bubble_type,obj_name) {
-  var ud = 1;               
-  var html_str;             
-  if(top >= 213) {          
+  var ud = 1;
+  var html_str;
+  if(top >= 213) {
     top -= 213;
     ud = 0;
   }
 
   if(ud) {
     html_str = GetMainDiv(left,top) + GetTapImgUD() + GetNImgUD() +
-      GetNEImgUD() + GetWImgUD() + GetCImgUD() + GetEImgUD() + 
+      GetNEImgUD() + GetWImgUD() + GetCImgUD() + GetEImgUD() +
       GetSWImgUD() + GetSImgUD() + GetSEImgUD();
   }
   else {
     html_str = GetMainDiv(left,top) + GetNWImg() + GetNImg() +
-      GetNEImg() + GetWImg() + GetCImg() + GetEImg() + 
+      GetNEImg() + GetWImg() + GetCImg() + GetEImg() +
       GetSTapImg() + GetSRightImg() + GetSEImg();
   }
   switch(bubble_type) {
@@ -235,7 +235,7 @@ function GetNEImgUD() {
     'position: absolute; z-index: 0; -moz-user-select: none; left: 237px;'+
     'top: 0px;" src="GoogleIcons/iw_ne_ud.png" height="96" width="25" />';
   }
-  else if(IsMicrosoft()) { 
+  else if(IsMicrosoft()) {
     return '<img style="border: 0pt none ; width: 25px; height: 96px;'+
     'position: absolute; z-index: 0; -moz-user-select: none; left: 237px;'+
     'top: 0px;" src="GoogleIcons/iw_ne_ud.gif" height="96" width="25" />';
@@ -302,7 +302,7 @@ function GetPopupForm(ud) {
   if(ud) top = 86;
   else top = 15;
   var html_str = "";
-  
+
   html_str += '<div style="position: absolute; left: 15px;'+
   'top: ' + top + 'px; z-index: 0; cursor: auto; width: 232px; height: 112px;'+
   'visibility: visible;"><div style="padding-right: 8px; width: 14em;">'+
@@ -312,7 +312,7 @@ function GetPopupForm(ud) {
 //   'top: ' + top + 'px; z-index: 0; cursor: auto; width: 232px; height: 112px;'+
 //   'visibility: visible;"><div><div style="padding-right: 8px; width: 14em;">'+
 //   '<div id="objQuery" style="font-weight: bold; visibility: visible;">';
-  
+
 
   html_str += 'What is this object?';
   html_str += '<div style="margin-top: 20px; z-index: 0;">';
@@ -326,9 +326,9 @@ function GetPopupForm(ud) {
   // If press enter, then submit; if press ESC, then delete:
   html_str +=
  ' onkeyup="var c;if(event.keyCode)c=event.keyCode;if(event.which)c=event.which;if(c==13)main_handler.SubmitQuery();if(c==27)main_handler.WhatIsThisObjectDeleteButton();" /><br />';
-  
+
   html_str +=
-    '<input type="button" value="Done" title="Press this button after you have provided the object\'s name." onclick="main_handler.SubmitQuery();" tabindex="0" /> '; 
+    '<input type="button" value="Done" title="Press this button after you have provided the object\'s name." onclick="main_handler.SubmitQuery();" tabindex="0" /> ';
 
   html_str +=
   '<input type="button" value="Undo close" title="Press this button if you accidentally closed the polygon.  You can continue adding control points." onclick="main_handler.WhatIsThisObjectUndoCloseButton();" tabindex="0" /> ';
@@ -407,7 +407,7 @@ function GetEditPopupForm(ud,obj_name) {
   return html_str;
 }
 
-function GetCloseImg(ud) {  
+function GetCloseImg(ud) {
   var top;
   if(ud) top = 81;
   else top = 10;
