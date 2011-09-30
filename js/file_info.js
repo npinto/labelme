@@ -207,7 +207,7 @@ function file_info() {
     return 1;
   };
 
-  //get video or picture mode 12.12.06 jmejia 
+  //get video or picture mode 12.12.06 jmejia
   this.GetMode = function() {
     return this.mode;
   };
@@ -227,12 +227,12 @@ function file_info() {
   this.SetImName = function (newImName){
     this.im_name = newImName;
   };
-  
+
   //get the movie name 12.12.06 jmejia
   this.GetMovName = function () {
     return this.mov_name;
   };
-  
+
   //change to support video mode
   this.GetImagePath = function () {
     if((this.mode=='i') || (this.mode=='c') || (this.mode=='f') || (this.mode=='im') || (this.mode=='mt')) return 'Images/' + this.dir_name + '/' + this.im_name;
@@ -307,7 +307,7 @@ function file_info() {
 	im_req.send('');
       }
     }
-    
+
     if(im_req.status==200) {
       this.dir_name = im_req.responseXML.getElementsByTagName("dir")[0].firstChild.nodeValue;
       this.im_name = im_req.responseXML.getElementsByTagName("file")[0].firstChild.nodeValue;

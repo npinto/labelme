@@ -4,25 +4,25 @@ var thandler;
 this.makeRequest = function(url, handler) {
 	req = false;
     if(window.XMLHttpRequest && !(window.ActiveXObject)) {
-    	try {
+	try {
 			req = new XMLHttpRequest();
         } catch(e) {
 			req = false;
         }
     } else if(window.ActiveXObject) {
-       	try {
-        	req = new ActiveXObject("Msxml2.XMLHTTP");
-      	} catch(e) {
-        	try {
-          		req = new ActiveXObject("Microsoft.XMLHTTP");
-        	} catch(e) {
-          		req = false;
-        	}
+	try {
+	req = new ActiveXObject("Msxml2.XMLHTTP");
+	} catch(e) {
+	try {
+		req = new ActiveXObject("Microsoft.XMLHTTP");
+	} catch(e) {
+		req = false;
+	}
 		}
     }
 	if(req) {
 		thandler = handler;
-		req.onreadystatechange = this.processReqChange;		
+		req.onreadystatechange = this.processReqChange;
 		req.open("GET", url, true);
 		req.send("");
 	}

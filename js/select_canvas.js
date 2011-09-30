@@ -13,7 +13,7 @@ function SelectCanvas() {
   this.isEditingControlPoint = 0;
   this.isMovingCenterOfMass = 0;
   this.editedControlPoints = 0; // whether the control points were edited
-  
+
   // *******************************************
   // Public methods:
   // *******************************************
