@@ -15,7 +15,7 @@ Intelligence Laboratory. Bryan Russell, Antonio Torralba, William T. Freeman
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see
-    <http://www.gnu.org/licenses/>. 
+    <http://www.gnu.org/licenses/>.
 -->
 
 <!--#set var="IncludeVideo" value="0" -->
@@ -26,8 +26,8 @@ Intelligence Laboratory. Bryan Russell, Antonio Torralba, William T. Freeman
 "http://www.w3.org/TR/xhtml11/DTD/xhtml11-strict.dtd">
 <!--#endif -->
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:v="urn:schemas-microsoft-com:vml" 
-      xmlns:svg="http://www.w3.org/2000/svg" 
+      xmlns:v="urn:schemas-microsoft-com:vml"
+      xmlns:svg="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink">
 
 <head>
@@ -44,7 +44,7 @@ Intelligence Laboratory. Bryan Russell, Antonio Torralba, William T. Freeman
 <!--#include virtual="./js/graphics_moz.js" -->
 <!--#endif -->
 
-<!--#include virtual="./js/my_scripts.js" -->  
+<!--#include virtual="./js/my_scripts.js" -->
 <!--#include virtual="./js/bubble-popups.js" -->
 <!--#include virtual="./js/image.js" -->
 <!--#include virtual="./js/file_info.js" -->
@@ -73,7 +73,7 @@ Intelligence Laboratory. Bryan Russell, Antonio Torralba, William T. Freeman
   var main_select_canvas;
   var main_draw_canvas;
   var main_image;
-  
+
   var xhtmlNS = 'http://www.w3.org/1999/xhtml';
 
 <!--#if expr="$IncludeVideo = 1" -->
@@ -86,7 +86,7 @@ Intelligence Laboratory. Bryan Russell, Antonio Torralba, William T. Freeman
 function CreateTicket() {
   var dirname = main_image.GetFileInfo().GetDirName();
   var imname = main_image.GetFileInfo().GetImName();
-  var ticket_url = 'generate_ticket.cgi?folder=' + dirname + 
+  var ticket_url = 'generate_ticket.cgi?folder=' + dirname +
     '&image=' + imname + '&username=' + username;
 
   // Submit ticket:
@@ -94,7 +94,7 @@ function CreateTicket() {
     req_submit = new XMLHttpRequest();
     req_submit.open("GET", ticket_url, true);
     req_submit.send('');
-  } 
+  }
   else if (window.ActiveXObject) {
     req_submit = new ActiveXObject("Microsoft.XMLHTTP");
     if (req_submit) {
@@ -181,7 +181,7 @@ function GetXMLFile() {
     req_submit.onreadystatechange = CheckXMLExists;
     req_submit.open("GET", xml_url, true);
     req_submit.send('');
-  } 
+  }
   else if (window.ActiveXObject) {
     req_submit = new ActiveXObject("Microsoft.XMLHTTP");
     if (req_submit) {
@@ -207,7 +207,7 @@ function MainInit() {
     if(view_ObjList) LoadAnnotationList();
     //if((m!='im') && (m!='mt')) LoadAnnotationList();
 
-    // Added for IE compatability.  Without it, there is extra space 
+    // Added for IE compatability.  Without it, there is extra space
     // at the top and the points are offset from where you clicked.
     // Also, myCanvas_bg does not show up if this is not here.
     //if(IsMicrosoft()) main_image.Zoom('fitted');
@@ -227,7 +227,7 @@ function MainInit() {
     main_request = new request();
     //handlerequest in main_video will handle response
     main_request.makeRequest(url, main_video);
-    
+
     document.getElementById('next_arrow').innerHTML = "";
     //allows for dot to be released on any mouseup
     mbody = document.getElementById("body");
@@ -237,10 +237,10 @@ function MainInit() {
     //remove any movie windows
     tc = document.getElementById('toolbar');
     tc.parentNode.removeChild(tc);
-		
+
     labels = document.getElementById('video_labels');
     labels.parentNode.removeChild(labels);
-		
+
     vp = document.getElementById('video');
     vp.parentNode.removeChild(vp);
   }
@@ -248,34 +248,34 @@ function MainInit() {
 
   var dirname = main_image.GetFileInfo().GetDirName();
   var imname = main_image.GetFileInfo().GetImName();
-//  document.getElementById('3d_link').href = 
+//  document.getElementById('3d_link').href =
 //    'view3D.html?folder=' + dirname + '&image=' + imname;
-//  document.getElementById('3d_link').href = 
+//  document.getElementById('3d_link').href =
 //    'http://labelme.csail.mit.edu/3D/' + dirname + '/' +
 //    imname.substr(0,imname.length-4) + '.wrl';
 
-//  document.getElementById('xml_url').href = 
+//  document.getElementById('xml_url').href =
 //    main_image.GetFileInfo().GetAnnotationPath();
 
   if(document.getElementById('img_url')) {
-    document.getElementById('img_url').href = 
+    document.getElementById('img_url').href =
       main_image.GetFileInfo().GetImagePath();
   }
 
-//  document.getElementById('vrml_embed').src = 
+//  document.getElementById('vrml_embed').src =
 //    'http://labelme.csail.mit.edu/3D/' + dirname + '/' +
 //    imname.substr(0,imname.length-4) + '.wrl';
 
 /*
-  document.getElementById('vrml_expand').href = 
+  document.getElementById('vrml_expand').href =
     'http://labelme.csail.mit.edu/3D/' + dirname + '/' +
     imname.substr(0,imname.length-4) + '.wrl';
 
-  document.getElementById('vrml_dload').href = 
+  document.getElementById('vrml_dload').href =
     'http://labelme.csail.mit.edu/3D/' + dirname + '/' +
     imname.substr(0,imname.length-4) + '.wrl';
 
-  document.getElementById('texture_dload').href = 
+  document.getElementById('texture_dload').href =
     'http://labelme.csail.mit.edu/3D/' + dirname + '/' + imname;
 */
 
@@ -453,33 +453,33 @@ WriteLogMsg('*start_loading');
 	      onmousedown="javascript:main_handler.RestToDraw(event);return false;"
 	      oncontextmenu="javascript:return false;"
 	      onmouseover="javascript:main_canvas.unselectObjects();">
-      <svg:svg 
+      <svg:svg
               id="myCanvas_bg"
 	      width="100%"
-	      height="100%" 
+	      height="100%"
 	      style="position:absolute;left:0px;top:0px;z-index:0;" />
       </div>
 
       <div
               id="select_canvas_div"
 	      style="position:absolute;left:0px;top:0px;z-index:-2;cursor:default;width:100%;height:100%;"
-	      oncontextmenu="javascript:return false;" 
+	      oncontextmenu="javascript:return false;"
 	      onmousedown="main_handler.SelectedCanvasMouseDown(event);return false;"
 	      onmousemove="main_handler.SelectedCanvasMouseMove(event);return false;"
 	      onmouseup="main_handler.SelectedCanvasMouseUp(event);return false;">
-      <svg:svg 
+      <svg:svg
               id="select_canvas"
 	      width="100%"
 	      height="100%"
 	      style="position:absolute;left:0px;top:0px;z-index:-2;" />
-      </div>	      
+      </div>
 
       <div
               id="draw_canvas_div"
 	      style="position:absolute;left:0px;top:0px;z-index:-2;cursor:crosshair;width:100%;height:100%;"
 	      onmousedown="javascript:main_handler.DrawCanvasMouseDown(event);return false;"
 	      oncontextmenu="javascript:return false;">
-      <svg:svg 
+      <svg:svg
               id="draw_canvas"
 	      width="100%"
 	      height="100%"
@@ -492,7 +492,7 @@ WriteLogMsg('*start_loading');
 	      onmousedown="javascript:event.preventDefault();WaitForInput();return false;"
 	      onmouseup="javascript:event.preventDefault();"
 	      oncontextmenu="javascript:return false;">
-      <svg:svg 
+      <svg:svg
               id="query_canvas"
 	      width="100%"
 	      height="100%"
@@ -584,7 +584,7 @@ WriteLogMsg('*start_loading');
       document.getElementById('right_side').style.overflow='auto';
       }
   </script>
-<!-- changed the scroll property above from just overflow:auto. 6.19.06 for IE and Firefox //-->  
+<!-- changed the scroll property above from just overflow:auto. 6.19.06 for IE and Firefox //-->
 
 
     <div style="font-size:small;">
@@ -623,7 +623,7 @@ else if (window.ActiveXObject) {
     im_req.send('');
   }
 }
-var host;    
+var host;
 if(im_req.status==200) {
   host = im_req.responseText;
 }

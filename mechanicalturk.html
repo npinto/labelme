@@ -21,9 +21,9 @@ MM_reloadPage(true);
 
 <table style="width:62em;" border="0">
   <tr>
-          
+
     <td style="width:8em;" valign="top"><a href="index.html" target="_blank"><img style="width:8em;" src="Icons/mt_example_good4.jpg" border="0" /></a></td>
-          
+
     <td valign="top" bordercolor="#000000">
 
 <h1>Amazon Mechanical Turk for LabelMe</h1>
@@ -31,15 +31,15 @@ MM_reloadPage(true);
 <p>
 Want to outsource your labeling task to the internet?  <a href="http://mturk.com" target="_blank">Amazon
 Mechanical Turk</a> allows access to many internet users who are ready to
-perform tasks for a fixed price.  
+perform tasks for a fixed price.
 </p>
 
 <p>
 The idea is simple: you provide a task and a selling price.
-Internet workers perform the task and are subsequently paid.  
+Internet workers perform the task and are subsequently paid.
 In Mechnical Turk terminology, tasks are called "HITs", people
 requesting work are called "Requesters", and people who do the work
-are called "Workers".  
+are called "Workers".
 </p>
 
 <p>
@@ -49,7 +49,7 @@ The process is simple, as we have provided scripts for creating and
 sending LabelMe annotation tasks onto Mechanical Turk.
 All you have to do is follow the instructions below and pay workers on
 Mechanical Turk to label images.  We collect the annotations, which
-are immediately available for download.  
+are immediately available for download.
 In this way, everybody wins: Mechanical Turk workers get paid, you get
 your images annotated, and the computer vision community gets access
 to more hand-labeled data.
@@ -68,7 +68,7 @@ instructions for setting up LabelMe on Mechanical Turk.
 <p>
 To upload a collection of images to LabelMe, simply <a
 href="AboutMe.html" target="_blank">contact us</a> and we can arrange to put your
-images into a folder.  
+images into a folder.
 We ask that your images do not contain any spaces or special
 characters (use <code>_</code> for space) and that the images have a
 .jpg extension.  Your images will live at:
@@ -112,14 +112,14 @@ find your access key and secret key.
 Next, download the <a
 href="http://developer.amazonwebservices.com/connect/entry.jspa?entryID=694&ref=featured" target="_blank">Amazon
 Mechanical Turk Command Line Tools</a> (note that so far, we have only
-tested the Linux/Mac version).  
+tested the Linux/Mac version).
 Unzip the file and follow the instructions inside the directory to install the
-Command Line Tools.  
+Command Line Tools.
 </p>
 
 <p>
 As a reminder, open and modify
-<code>./aws-mturk-clt-1.3.0/bin/mturk.properties</code> to include your access key and secret key.  
+<code>./aws-mturk-clt-1.3.0/bin/mturk.properties</code> to include your access key and secret key.
 Also, make sure you set the following environment variables
 (e.g. using the command "<code>export VAR=/path/to/file</code>" in bash):
 <br />
@@ -140,7 +140,7 @@ Turk</h3>
 Scripts for sending LabelMe jobs to Mechanical Turk are available
 <a href="LabelMeMechanicalTurk.zip">here</a>
 (currently, the scripts are available for Linux/Mac only).
-After download, unzip the file and change to the directory.  
+After download, unzip the file and change to the directory.
 </p>
 
 <p>
@@ -155,8 +155,8 @@ images are to be annotated.
 <h3>5. Submit jobs to Mechanical Turk</h3>
 
 <p>
-Let us now submit jobs to Mechanical Turk.  
-In this section, we will use Mechanical Turk's "sandbox" server.  
+Let us now submit jobs to Mechanical Turk.
+In this section, we will use Mechanical Turk's "sandbox" server.
 The sandbox is free to use (you have fake credits on this server), so
 you can test here to make sure everything works.  When you are ready
 for the real thing, simply remove all <code>-sandbox</code> flags and
@@ -187,7 +187,7 @@ information on further customizations for the task.
 </p>
 
 <p>
-We are now ready to submit to Mechanical Turk.  
+We are now ready to submit to Mechanical Turk.
 To submit to the sandbox, run the following at the Linux command
 prompt (not the MATLAB prompt):
 </p>
@@ -298,7 +298,7 @@ workers:
 
 <p>
 The following are statistics for the tasks that we submitted to
-Mechanical Turk.  
+Mechanical Turk.
 </p>
 
 <p>
@@ -538,7 +538,7 @@ not.  Use <code>&amp;amp;objlist=hidden</code> to make it hidden.
 </table>
 
 <p>&nbsp;</p>
-(c) 2009 MIT, Computer Science and Artificial Intelligence Laboratory. 
+(c) 2009 MIT, Computer Science and Artificial Intelligence Laboratory.
 <!--WEBBOT bot="HTMLMarkup" startspan ALT="Site Meter" -->
 <p><script type="text/javascript" language="JavaScript">var site="s21labelme"</script>
 <script type="text/javascript" language="JavaScript1.2" src="http://s21.sitemeter.com/js/counter.js?site=s21labelme">
