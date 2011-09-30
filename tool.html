@@ -1,0 +1,673 @@
+<!--
+LabelMe is a WEB-based image annotation tool and a Matlab toolbox that allows researchers to label images and share the annotations with the rest of the community.
+Copyright (C) 2007  MIT, Computer Science and Artificial
+Intelligence Laboratory. Bryan Russell, Antonio Torralba, William T. Freeman
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see
+    <http://www.gnu.org/licenses/>. 
+-->
+
+<!--#set var="IncludeVideo" value="0" -->
+
+<!--#if expr="!${InternetExplorer}" -->
+<!DOCTYPE html PUBLIC
+"-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11-strict.dtd">
+<!--#endif -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:v="urn:schemas-microsoft-com:vml" 
+      xmlns:svg="http://www.w3.org/2000/svg" 
+      xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<head>
+<title>LabelMe: The open annotation tool</title>
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE,NO-STORE,MUST-REVALIDATE" />
+<META HTTP-EQUIV="imagetoolbar" CONTENT="no" />
+<LINK REL="SHORTCUT ICON" HREF="Icons/favicon16.ico" />
+
+<script type="text/javascript">
+// <![CDATA[
+<!--#if expr="${InternetExplorer}" -->
+<!--#include virtual="./js/graphics_ie.js" -->
+<!--#else -->
+<!--#include virtual="./js/graphics_moz.js" -->
+<!--#endif -->
+
+<!--#include virtual="./js/my_scripts.js" -->  
+<!--#include virtual="./js/bubble-popups.js" -->
+<!--#include virtual="./js/image.js" -->
+<!--#include virtual="./js/file_info.js" -->
+<!--#include virtual="./js/annotation.js" -->
+<!--#include virtual="./js/canvas.js" -->
+<!--#include virtual="./js/select_canvas.js" -->
+<!--#include virtual="./js/draw_canvas.js" -->
+<!--#include virtual="./js/query_canvas.js" -->
+<!--#include virtual="./js/handler.js" -->
+<!--#include virtual="./js/request.js" -->
+
+<!--#if expr="$IncludeVideo = 1" -->
+<!--#include virtual="./js/video.js" -->
+<!--#include virtual="./js/videoFrameBar.js" -->
+<!--#include virtual="./js/videoPlayer.js" -->
+<!--#endif -->
+
+  GetBrowserInfo();
+  if(!(IsNetscape() || (IsMicrosoft() && (bversion>=4.5)) || IsSafari() || IsChrome())) {
+//  if(!(IsNetscape() || (IsMicrosoft() && (bversion>=4.5)))) {
+    window.location="browser.html";
+  }
+
+  var main_handler;
+  var main_canvas;
+  var main_select_canvas;
+  var main_draw_canvas;
+  var main_image;
+  
+  var xhtmlNS = 'http://www.w3.org/1999/xhtml';
+
+<!--#if expr="$IncludeVideo = 1" -->
+  windowObj = new Object();
+  windowObj.zIndex = 1;
+  var main_request;
+  var main_video;
+<!--#endif -->
+
+function CreateTicket() {
+  var dirname = main_image.GetFileInfo().GetDirName();
+  var imname = main_image.GetFileInfo().GetImName();
+  var ticket_url = 'generate_ticket.cgi?folder=' + dirname + 
+    '&image=' + imname + '&username=' + username;
+
+  // Submit ticket:
+  if (window.XMLHttpRequest) {
+    req_submit = new XMLHttpRequest();
+    req_submit.open("GET", ticket_url, true);
+    req_submit.send('');
+  } 
+  else if (window.ActiveXObject) {
+    req_submit = new ActiveXObject("Microsoft.XMLHTTP");
+    if (req_submit) {
+      req_submit.open("GET", ticket_url, true);
+      req_submit.send('');
+    }
+  }
+}
+
+function GoToVrmlDownloadPage() {
+  var dirname = main_image.GetFileInfo().GetDirName();
+  var imname = main_image.GetFileInfo().GetImName();
+  var url3D = 'view3D.html?folder=' + dirname + '&image=' + imname;
+    window.open(url3D);
+}
+
+function Check3DPageExists() {
+  if(req_submit.readyState==4) {
+    if(req_submit.status != 200) {
+      CreateTicket();
+    }
+    GoToVrmlDownloadPage();
+  }
+}
+
+function Make3D() {
+  WriteLogMsg('*make3d_pressed ' + main_image.GetFileInfo().GetImagePath());
+  var dirname = main_image.GetFileInfo().GetDirName();
+  var imname = main_image.GetFileInfo().GetImName();
+  var url3D = '3D/' + dirname + '/' +
+    imname.substr(0,imname.length-4) + '.wrl';
+
+  if(main_canvas.GetAnnotations().length==0) {
+    alert("In order for the 3D model to be generated, you must provide at least 5 labeled objects.  Please start labeling and try pressing Make 3D again.");
+//    alert("The 3D model has not been created yet.  Note that the model starts to be produced when there are at least 5 labeled objects.  Please continue labeling and try again");
+    return;
+  }
+
+  var numUserAnno = 0;
+  for(ii = 0; ii < (main_canvas.GetAnnotations().length-num_orig_anno); ii++) {
+    if(main_canvas.GetAnnotations()[num_orig_anno+ii].GetDeleted()==0) numUserAnno++;
+  }
+
+  if(numUserAnno) {
+    CreateTicket();
+    GoToVrmlDownloadPage();
+  }
+  else {
+    // Check if VRML file exists:
+    if (window.XMLHttpRequest) {
+      req_submit = new XMLHttpRequest();
+      req_submit.onreadystatechange = Check3DPageExists;
+      req_submit.open("GET", url3D, true);
+      req_submit.send('');
+    }
+    else if (window.ActiveXObject) {
+      req_submit = new ActiveXObject("Microsoft.XMLHTTP");
+      if (req_submit) {
+        req_submit.onreadystatechange = Check3DPageExists;
+        req_submit.open("GET", url3D, true);
+	req_submit.send('');
+      }
+    }
+  }
+}
+
+function CheckXMLExists() {
+  if(req_submit.readyState==4) {
+    if(req_submit.status != 200) {
+      alert("The XML annotation file does not exist yet.  Please label an object and try again");
+    }
+    else {
+      window.open(main_image.GetFileInfo().GetAnnotationPath());
+    }
+  }
+}
+
+function GetXMLFile() {
+  var xml_url = main_image.GetFileInfo().GetAnnotationPath();
+
+  // Check if VRML file exists:
+  if (window.XMLHttpRequest) {
+    req_submit = new XMLHttpRequest();
+    req_submit.onreadystatechange = CheckXMLExists;
+    req_submit.open("GET", xml_url, true);
+    req_submit.send('');
+  } 
+  else if (window.ActiveXObject) {
+    req_submit = new ActiveXObject("Microsoft.XMLHTTP");
+    if (req_submit) {
+      req_submit.onreadystatechange = CheckXMLExists;
+      req_submit.open("GET", xml_url, true);
+      req_submit.send('');
+    }
+  }
+}
+
+function MainInit() {
+  main_handler = new handler();
+  main_canvas = new canvas();
+  main_select_canvas = new SelectCanvas();
+  main_draw_canvas = new DrawCanvas();
+  main_query_canvas = new QueryCanvas();
+  main_image = new image('im');
+
+  function main_image_onload_helper() {
+    main_image.SetImageDimensions();
+    LoadAnnotations(main_image.GetFileInfo().GetFullName());
+    var m = main_image.GetFileInfo().GetMode();
+    if(view_ObjList) LoadAnnotationList();
+    //if((m!='im') && (m!='mt')) LoadAnnotationList();
+
+    // Added for IE compatability.  Without it, there is extra space 
+    // at the top and the points are offset from where you clicked.
+    // Also, myCanvas_bg does not show up if this is not here.
+    //if(IsMicrosoft()) main_image.Zoom('fitted');
+  };
+
+  main_image.GetNewImage(main_image_onload_helper);
+
+<!--#if expr="$IncludeVideo = 1" -->
+  //movie mode setup 12.12.06 jmejia
+  if(main_handler.IsMovieMode()){
+    //create the video class
+    main_video = new video();
+    folder = main_image.GetFileInfo().GetDirName();
+    movie = main_image.GetFileInfo().GetMovName();
+    url = "videoThumbnails/thumbnail.php?movie="+movie+"&folder="+folder;
+    //request frames to be loaded and allow main_video to handle results
+    main_request = new request();
+    //handlerequest in main_video will handle response
+    main_request.makeRequest(url, main_video);
+    
+    document.getElementById('next_arrow').innerHTML = "";
+    //allows for dot to be released on any mouseup
+    mbody = document.getElementById("body");
+    mbody.setAttribute("OnMouseup",  "main_handler.dragStop('event', 'dot')");
+  }
+  else{
+    //remove any movie windows
+    tc = document.getElementById('toolbar');
+    tc.parentNode.removeChild(tc);
+		
+    labels = document.getElementById('video_labels');
+    labels.parentNode.removeChild(labels);
+		
+    vp = document.getElementById('video');
+    vp.parentNode.removeChild(vp);
+  }
+<!--#endif -->
+
+  var dirname = main_image.GetFileInfo().GetDirName();
+  var imname = main_image.GetFileInfo().GetImName();
+//  document.getElementById('3d_link').href = 
+//    'view3D.html?folder=' + dirname + '&image=' + imname;
+//  document.getElementById('3d_link').href = 
+//    'http://labelme.csail.mit.edu/3D/' + dirname + '/' +
+//    imname.substr(0,imname.length-4) + '.wrl';
+
+//  document.getElementById('xml_url').href = 
+//    main_image.GetFileInfo().GetAnnotationPath();
+
+  if(document.getElementById('img_url')) {
+    document.getElementById('img_url').href = 
+      main_image.GetFileInfo().GetImagePath();
+  }
+
+//  document.getElementById('vrml_embed').src = 
+//    'http://labelme.csail.mit.edu/3D/' + dirname + '/' +
+//    imname.substr(0,imname.length-4) + '.wrl';
+
+/*
+  document.getElementById('vrml_expand').href = 
+    'http://labelme.csail.mit.edu/3D/' + dirname + '/' +
+    imname.substr(0,imname.length-4) + '.wrl';
+
+  document.getElementById('vrml_dload').href = 
+    'http://labelme.csail.mit.edu/3D/' + dirname + '/' +
+    imname.substr(0,imname.length-4) + '.wrl';
+
+  document.getElementById('texture_dload').href = 
+    'http://labelme.csail.mit.edu/3D/' + dirname + '/' + imname;
+*/
+
+  if(document.getElementById('username_main_div')) write_username();
+
+  WriteLogMsg('*done_loading_' + main_image.GetFileInfo().GetImagePath());
+}
+
+// ]]>
+</script>
+
+<!-- added body overflow:hidden 7.5.06 to get rid of extra scrollbars -->
+<!-- in IE.  may need to turn this off for debugging //-->
+
+<!--#if expr="${InternetExplorer}" -->
+<style>v\:* { behavior: url(#default#VML); }</style>
+<!--#endif -->
+
+<style>
+<!--#if expr="$IncludeVideo = 1" -->
+@import url("css/videoPlayer.css");
+@import url("css/videoFrameBar.css");
+<!--#endif -->
+@import url("css/styles.css");
+</style>
+
+</head>
+
+<body id="body" onkeyup="javascript:main_handler.KeyPress(event);" onmousemove="javascript:main_handler.MainPageMouseMove(event);" onmouseup="javascript:main_handler.MainPageMouseUp(event);" style="visibility:hidden;" >
+
+<script type="text/javascript">
+WriteLogMsg('*start_loading');
+</script>
+
+  <div id="mt_submit_form"></div>
+
+  <div id="header" style="font-size:small; font-weight:bold;">
+
+
+  <table cellpadding="0" cellspacing="0">
+    <tr>
+      <td class="top">
+        <a href="index.html" target="_blank" title="Please">
+<!--          <img src="Icons/LabelMeNEWtight198x55.gif" height="55" alt="please" /> -->
+          <img src="Icons/LabelMeNEWtight198x55.gif" style="height:3em;" alt="please" />
+	</a>
+      </td>
+      <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td class="top" align="center">
+        <table cellpadding="0" cellspacing="0">
+	<tr>
+	<td>
+	<a href="javascript:main_handler.ZoomPlus(-0.2);" alt="Zoom out" title="Zoom out"><img src="Icons/LMzoomdown.png" style="width:3em;" /></a>
+	<a href="javascript:main_handler.ZoomPlus(0.2);" alt="Zoom in" title="Zoom in"><img src="Icons/LMzoomup.png" style="width:3em;" /></a>
+	<a href="javascript:main_handler.ZoomFitImage();" title="Fit image" style="text-decoration:none;"><img src="Icons/LMfit.png" style="width:3em;" /></a>
+	</td>
+	</tr>
+	<tr>
+	<td align="center">Zoom</td>
+	</tr>
+	</table>
+      </td>
+      <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td>
+        <a id="png_undo" href="javascript:main_handler.EraseSegmentButton();" alt="Undo last control point" title="Undo last control point" style="text-decoration:none;">
+	<script type="text/javascript">
+	ShowUndoImg();
+	</script>
+	</a><br />
+	Erase
+      </td>
+      <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td class="top" align="center">
+<!--        <a href="guidelines.html" target="_blank"><img src="Icons/LMhelp.png" style="height:3em;" /></a><br /> -->
+<!--        <a href="3Dintroduction.html" target="_blank"><img src="Icons/LMhelp.png" style="height:3em;" /></a><br /> -->
+<!--        <a href="http://people.csail.mit.edu/torralba/labelme/description3D.html" target="_blank"><img src="Icons/LMhelp.png" style="height:3em;" /></a><br />-->
+        <a href="labeling_instructions.html" title="Show help page" target="_blank"><img src="Icons/LMhelp.png" style="height:3em;" /></a><br />
+	Help
+      </td>
+      <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td align="center">
+        <a id="3d_link" href="javascript:Make3D();" title="Want to see this image in 3D? Press this to automatically create a 3D model of the image"><img src="Icons/LM3d.png" style="height:3em;" /></a>
+<!--        <a id="3d_link" target="_blank"><img src="Icons/LM3d.png" style="height:3em;" /></a> -->
+	<br />
+	Make 3D
+      </td>
+      <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td class="top" align="center">
+        <a href="LabelMe3D/upload3D.html" target="_blank" title="Want to label your own image? Press this to upload an image."><img src="Icons/LMuploadNew.png" style="height:3em;" /></a><br />
+	Upload image
+      </td>
+      <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td align="center">
+        <a href="javascript:ShowNextImage();" alt="Show me another image" title="Show me another image" style="text-decoration:none;"><img src="Icons/LMarrow.png" style="height:3em;" /></a><br />
+	Show me another image
+<!--	<a href="javascript:ShowNextImage();" alt="Show next image">
+	Show me another image</a> -->
+      </td>
+    </tr>
+  </table>
+
+  </div>
+
+
+<table cellspacing-right="10">
+ <tr>
+  <td colspan="2">
+
+<!--#if expr="$IncludeVideo = 1" -->
+<div id="video_labels" class="box" style="position:relative; width:auto; height:auto;">
+<table><tr><td><div onclick="main_handler.onTop('toolbar');" style="cursor:pointer;">Show Frames&nbsp;|</div></td>
+<td><div onclick="main_handler.onTop('video');" style="cursor:pointer;">&nbsp;Show Video</div></td></tr></table>
+</div>
+<!--#endif -->
+
+  <div id="main_section">
+    <div id="loading">Loading image...</div>
+    <div id="main_image" class="top" style="visibility:hidden;overflow:auto;">
+      <div id="show_new_image" style="visibility:hidden;">
+        <form name="submitform"
+              id="submitform"
+              action="javascript:loadXMLDoc();"
+              method="post"
+              style="margin-bottom:0px;">
+        </form>
+      </div>
+
+      <img id="im" style="vertical-align:bottom;z-index:-3;" />
+
+      <!--#if expr="${InternetExplorer}" -->
+      <div id="myCanvas_bg"
+       style="position:absolute;left:0px;top:0px;width:100%;height:100%;cursor:crosshair;z-index:0;background-color:transparent;background-image:url(doesnotexist.png);"
+       onmousedown="main_handler.RestToDraw(event);return false;"
+       onmouseover="javascript:main_canvas.unselectObjects();"
+       oncontextmenu="return false;"
+      ></div>
+
+      <div id="select_canvas"
+       style="position:absolute;left:0px;top:0px;width:100%;height:100%;cursor:default;z-index:-2;background-color:transparent;background-image:url(doesnotexist.png);"
+       oncontextmenu="return false;"
+       onmousedown="main_handler.SelectedCanvasMouseDown(event);return false;"
+       onmousemove="main_handler.SelectedCanvasMouseMove(event);return false;"
+       onmouseup="main_handler.SelectedCanvasMouseUp(event);return false;"
+      ></div>
+
+      <div id="draw_canvas"
+       style="position:absolute;left:0px;top:0px;width:100%;height:100%;cursor:crosshair;z-index:-2;background-color:transparent;background-image:url(doesnotexist.png);"
+       onmousedown="main_handler.DrawCanvasMouseDown(event);return false;"
+       oncontextmenu="return false;"
+      ></div>
+
+      <div id="query_canvas"
+       style="position:absolute;left:0px;top:0px;width:100%;height:100%;cursor:crosshair;z-index:-2;background-color:transparent;background-image:url(doesnotexist.png);"
+       onmousedown="WaitForInput();return false;"
+       oncontextmenu="return false;"
+      ></div>
+
+      <!--#else -->
+
+      <div
+              id="myCanvas_bg_div"
+	      style="position:absolute;left:0px;top:0px;z-index:0;cursor:crosshair;width:100%;height:100%;"
+	      onmousedown="javascript:main_handler.RestToDraw(event);return false;"
+	      oncontextmenu="javascript:return false;"
+	      onmouseover="javascript:main_canvas.unselectObjects();">
+      <svg:svg 
+              id="myCanvas_bg"
+	      width="100%"
+	      height="100%" 
+	      style="position:absolute;left:0px;top:0px;z-index:0;" />
+      </div>
+
+      <div
+              id="select_canvas_div"
+	      style="position:absolute;left:0px;top:0px;z-index:-2;cursor:default;width:100%;height:100%;"
+	      oncontextmenu="javascript:return false;" 
+	      onmousedown="main_handler.SelectedCanvasMouseDown(event);return false;"
+	      onmousemove="main_handler.SelectedCanvasMouseMove(event);return false;"
+	      onmouseup="main_handler.SelectedCanvasMouseUp(event);return false;">
+      <svg:svg 
+              id="select_canvas"
+	      width="100%"
+	      height="100%"
+	      style="position:absolute;left:0px;top:0px;z-index:-2;" />
+      </div>	      
+
+      <div
+              id="draw_canvas_div"
+	      style="position:absolute;left:0px;top:0px;z-index:-2;cursor:crosshair;width:100%;height:100%;"
+	      onmousedown="javascript:main_handler.DrawCanvasMouseDown(event);return false;"
+	      oncontextmenu="javascript:return false;">
+      <svg:svg 
+              id="draw_canvas"
+	      width="100%"
+	      height="100%"
+	      style="position:absolute;left:0px;top:0px;z-index:-2;" />
+      </div>
+
+      <div
+              id="query_canvas_div"
+	      style="position:absolute;left:0px;top:0px;z-index:-2;cursor:default;width:100%;height:100%;"
+	      onmousedown="javascript:event.preventDefault();WaitForInput();return false;"
+	      onmouseup="javascript:event.preventDefault();"
+	      oncontextmenu="javascript:return false;">
+      <svg:svg 
+              id="query_canvas"
+	      width="100%"
+	      height="100%"
+	      style="position:absolute;left:0px;top:0px;z-index:-2;" />
+      </div>
+
+      <script type="text/javascript">
+//      alert(document.getElementById('myCanvas_bg').onmousedown);
+//      alert(document.getElementById('im').style.zIndex);
+//      document.getElementById('myCanvas_bg').setAttributeNS(null,"onmousedown","javscript:alert('hi');");
+      </script>
+      <!--#endif -->
+
+    </div>
+  </div>
+</td></tr></table>
+
+<!--#if expr="$IncludeVideo = 1" -->
+<div id="toolbar" class="box" style="left:0px;top:300px;" title="video frames">
+<div class="bar" style="cursor:move; height:12px" onmousedown="main_handler.dragStart(event,'toolbar', 'window')" onmouseup="main_handler.dragStop(event, 'window')"></div>
+<div class="close" onmousedown="main_handler.hideWindow('toolbar')" style="cursor:pointer;"><img style="position:relative;" src="gifs/close.gif" /></div>
+<div id="toolbar_content" style="overflow:visible; height:auto;" onclick="main_handler.onTop('toolbar')">
+
+<table height="auto"><tr><td valign="top"><div id="task_plus" style="cursor:pointer;" onClick="main_handler.taskPlus();"><img style="position:relative; top:3px;" src="gifs/plus.gif" /></div></td>
+<td vallign="top" rowspan="2">
+
+<div id="framebar" style="left:3px;">Loading frames...</div>
+</td>
+</tr><tr>
+<td valign="bottom">
+<div id="task_minus" style="cursor:pointer;" onClick="main_handler.taskMinus();"><img style="position:relative; top:-3px;" src="gifs/minus.gif" /></div>
+</td>
+</tr></table>
+
+</div>
+<div class="lowerbar" onmousedown="main_handler.dragStart(event,'toolbar', 'window')" onmouseup="main_handler.dragStop(event, 'window');"></div>
+</div>
+
+
+
+<div id="video" class="box" style="left:400px;top:200px; width:133px;">
+<div class="bar" style="height:12px; cursor:move" onmousedown="main_handler.dragStart(event, 'video', 'window')" onmouseup="main_handler.dragStop(event, 'window');"></div>
+<div class="close" onmousedown="main_handler.hideWindow('video');" style="cursor:pointer;">
+<img style="position:relative;" src="gifs/close.gif" /></div>
+<table><tr><td>
+<div id="video_content" class="content" style="height:90px; width:auto;"></div>
+</td></tr><tr><td>
+<div id="video_line" onclick="main_handler.adjustPoint(event);"></div>
+</td></tr></table>
+
+<div class="lowerbar" style="cursor:move;" onmousedown="main_handler.dragStart(event, 'video', 'window');" onmouseup="main_handler.dragStop(event, 'window');">
+<div id="cloading">Loading video...</div>
+<div id="controls" style="visibility:hidden;">
+<table align="center"><tr><td>
+<div id="prev" onclick="main_player.prev()" style="overflow:hidden; cursor:pointer;">
+<img src="gifs/prev.gif" />
+</div>
+</td><td>
+<div id="play" style="cursor:pointer; overflow:hidden;" onclick="main_player.play()">
+<img src="gifs/play.gif" />
+</div>
+</td><td>
+<div id="pause" onclick="main_player.pause()" style="overflow:hidden; cursor:pointer;">
+<img src="gifs/pause.gif" />
+</div>
+</td><td>
+<div id="stop" onclick="main_player.stop()" style="cursor:pointer; overflow:hidden;">
+<img src="gifs/stop.gif" />
+</div>
+</td><td>
+<div id="next" onclick="main_player.next()" style="cursor:pointer; overflow:hidden;">
+<img src="gifs/next.gif" />
+</div>
+</td>
+</tr></table>
+</div>
+</div>
+</div>
+<!--#endif -->
+
+  <div id="right_side">
+
+  <script type="text/javascript">
+    if(IsMicrosoft()) {
+       document.getElementById('right_side').style.overflowY='auto';
+       document.getElementById('right_side').style.overflowX='visible';
+      }
+    else {
+      document.getElementById('right_side').style.overflow='auto';
+      }
+  </script>
+<!-- changed the scroll property above from just overflow:auto. 6.19.06 for IE and Firefox //-->  
+
+
+    <div style="font-size:small;">
+
+            <div id="username_main_div" style="font-size:small; padding-top:0.5em; padding-bottom:0.5em; padding-left:0.5em; padding-right:0.5em; background-color:#eeeeff;">
+	    </div>
+            <script type="text/javascript">
+//              write_username();
+            </script>
+
+      <div id="counter_div" style="font-size:small;">
+        <p>There are <font size="3"><b><span
+        id="anno_count"></span></b>&nbsp;</font>labelled objects
+	</p>
+      </div>
+
+<!--
+      <div style="font-size:small; padding-top:0.5em; padding-bottom:0.5em; padding-left:0.5em; padding-right:0.5em; background-color:#eeeeff;">
+        <p>
+	Your country is <b><div id="hostdiv" /></b>
+
+<script language="JavaScript" type="text/JavaScript">
+var ip = '<!--#echo var="REMOTE_ADDR"-->';
+var url = 'lookup_host.cgi';
+var im_req;
+// branch for native XMLHttpRequest object
+if (window.XMLHttpRequest) {
+  im_req = new XMLHttpRequest();
+  im_req.open("POST", url, false);
+  im_req.send('');
+}
+else if (window.ActiveXObject) {
+  im_req = new ActiveXObject("Microsoft.XMLHTTP");
+  if (im_req) {
+    im_req.open("POST", url, false);
+    im_req.send('');
+  }
+}
+var host;    
+if(im_req.status==200) {
+  host = im_req.responseText;
+}
+else {
+  alert('Fatal: there are problems with fetch_image.cgi');
+}
+
+InsertAfterDiv(host,'hostdiv');
+</script>
+
+	</p>
+	</div>
+-->
+
+    </div>
+
+    <p>
+    <font size="3"><b>Polygons in this image</b></font>
+    <div id="img_xml_download_div">
+    <font size="-2">
+    (<b><a id="img_url" target="_blank" title="Download this image.">IMG</a></b>,
+    <b><a id="xml_url" href="javascript:GetXMLFile();" title="Download annotations for this image.">XML</a></b>)
+    </font>
+    </div>
+    </p>
+
+    <div id="anno_anchor">
+    </div>
+
+  </div>
+
+<!-- Copyright code...to be included later???
+<div id="bottom_text" style="position:absolute;right:0;bottom:0;background-color:yellow;">
+<font size=-3>&copy;2005 Trustees of MIT</font></div>
+-->
+
+<div id="mt_feedback" />
+
+<script type="text/javascript">
+  MainInit();
+
+  // Collect statistics:
+  var ref = document.referrer;
+</script>
+</body>
+
+</html>

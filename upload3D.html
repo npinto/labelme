@@ -1,0 +1,116 @@
+<html>
+<head>
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<style type="text/css">
+img {border:0; border-top:0;}
+</style>
+<script language="JavaScript" type="text/JavaScript">
+<!--
+function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+}
+MM_reloadPage(true);
+
+var username = '';
+var collection = '';
+function ParseURL() {
+  var url = document.URL;
+  var idx = url.indexOf('?');
+  var keypair, varname, value;
+  if(idx!=-1) {
+    url = url.substring(idx+1,url.length);
+    for(var i=0; i<url.split("&").length; i++) {
+      keypair = url.split("&")[i];
+      varname = keypair.split("=")[0];
+      value = keypair.split("=")[1];
+      switch(varname) {
+        case 'username':
+	  username = value;
+	  break;
+	case 'collection':
+	  collection = value;
+	  break;
+	default:
+	  alert('Unknown url field');
+      }
+    }
+  }
+  else {
+    alert('Invalid URL');
+    window.location = 'http://labelme.csail.mit.edu';
+  }
+}
+//-->
+</script>
+</head>
+<body>
+
+<div id="Layer1" style="position:absolute; left:590px; top:-61px; width:419px; height:319px; z-index:1"><img src="Icons/wireframe2.jpg" width="407" height="314"></div>
+<div id="Layer2" style="position:absolute; left:14px; top:62px; width:960px; height:32px; z-index:2"> 
+
+  <form action="upload.cgi" enctype="multipart/form-data" method="post">
+    <p>
+<li>Do not upload images for which you are not the copyright holder. 
+<li>We will remove images that contain inappropriate content or that are copyrighted. 
+<li>If you are unsure if the content of the images is appropriate, you can <a href="http://people.csail.mit.edu/torralba/research/LabelMe/js/AboutMe.html">contact us</a>. 
+</p>
+
+<div id="msgs"></div>
+
+<p>
+Upload your picture (*.jpg) to LabelMe (5 MB maximum):
+
+<input type="file" name="photo" size="100" />
+
+<input type="hidden" id="username" name="username" value="" />
+<input type="hidden" id="collection" name="folder" value="" />
+
+<script language="JavaScript" type="text/JavaScript">
+ParseURL();
+document.getElementById('username').value = username;
+document.getElementById('collection').value = collection;
+</script>
+
+<p>
+Author: <br /><input type="text" name="author" />
+</p>
+<p>
+Description: <br /><textarea rows="5" cols="50" name="description"></textarea>
+</p>
+<p>
+Include image file name into annotation file? <input type="checkbox" name="include_fname" />
+</p>
+
+<!--
+    <p>
+    Your LabelMe ID (this ID will be associated with your picture):
+    <br />
+    <input type="text" name="username" />
+    </p>
+    <p>
+    Folder name:
+    <br />
+    <input type="text" name="folder" />
+    </p>
+-->
+   
+    <input type="submit" name="submit" value="Upload image" />
+    <p>The pictures that you upload, along with the annotations that you
+    provide, will be made 
+    available for computer vision research as part of the <a href="http://labelme.csail.mit.edu/">LabelMe 
+    database</a>.  
+    </p>
+    <p>
+    Thank you for your contribution!
+    </p>
+  </form>
+</div>
+
+<a href="index.html"> <img src="Icons/LabelMeNEWtight198x55.gif" height="55" alt="please"> 
+</a> 
+<p>
+</p> 
+</body>
+</html> 

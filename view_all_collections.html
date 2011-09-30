@@ -1,0 +1,94 @@
+<html> 
+<head>
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE,NO-STORE,MUST-REVALIDATE" />
+<script language="JavaScript" type="text/JavaScript">
+
+<!--
+
+function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+
+}
+
+MM_reloadPage(true);
+
+//-->
+
+</script>
+</head>
+
+
+<body>
+
+<div id="Layer1" style="position:absolute; left:50%; margin-left:-443px; top:10px; width:865px; height:1836px; z-index:1"> 
+
+  <div id="Layer2" style="position:absolute; left:62px; top:33px; width:214px; height:58px; z-index:6"><a href="index.html"><img src="Icons/LabelMeNEWtight198x55.gif" width="198" height="55" border="0" /></a></div>
+
+  <div id="Layer2" style="position:absolute; left:800px; top:70px;width:214px; height:58px; z-index:6">
+<font size="+2">
+<div id="username"></div>
+</font></div>
+
+  <div id="Layer2" style="position:absolute; left:800px; top:120px;width:214px; height:58px; z-index:8">
+<a href="signin.html">Log out</a>
+</div>
+
+  <div id="Layer2" style="position:absolute; left:42px; top:120px; width:890px; height:390px; z-index:6">
+
+<div id="msgs"></div>
+
+<p>
+<form action="create_collection.cgi" enctype="multipart/form-data" method="post">
+<table>
+<tr>
+<td>
+New collection name: 
+</td>
+<td>
+<input type="text" id="collection" name="collection" />
+<script type="text/javascript">
+  document.getElementById('collection').focus();
+  document.getElementById('collection').select();
+</script>
+<input type="hidden" />
+</td>
+<td>
+<input type="submit" name="submit" value="Create collection" />
+</td>
+</tr>
+</table>
+</form>
+</p>
+
+<div style="background-color:#aaaa00;width:4.5em;padding:0.5em;">Collections</div>
+<div id="collection_data"></div>
+
+</div>   
+
+  <div id="Layer3" style="position:absolute; left:49px; top:177px; width:229px; height:62px; z-index:3"> 
+
+  </div>
+
+
+
+
+  <img src="Icons/box2.png" width="979" height="684"></div>
+
+<!--
+<div id="Layer6" style="position:absolute; left:7px; top:700px; width:841px; height:58px; z-index:2"> 
+
+  <p>The LabelMe software is available for free to researchers at academic institutions 
+
+    (universities, schools and government research labs). </p>
+
+</div>
+-->
+
+</body>
+
+</html>

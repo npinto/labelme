@@ -1,0 +1,144 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>LabelMe code registration</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE,NO-STORE,MUST-REVALIDATE" />
+    <META HTTP-EQUIV="imagetoolbar" CONTENT="no" />
+  </head>
+
+  <script text/javascript>
+  function toggle_submit() {
+  if(document.getElementById('agree').checked)
+    document.getElementById('download_code').disabled=false;
+  else
+    document.getElementById('download_code').disabled=true;
+  }
+  </script>
+ 
+  <body>
+  <h1>
+  <img alt="MIT" src="http://mit.edu/img/mit-daily-logo.gif" />
+  LabelMe code registration form
+
+<img alt="MIT" src="http://mit.edu/img/mit-daily-logo.gif" />
+
+    
+</p></h1>
+ 
+  <hr />
+<p>Please read this page in its entirety before registering.</p>
+
+    
+<p>The LabelMe software is available for free to
+    researchers at academic institutions
+    (universities, schools and government research
+    labs). It is also freely available to users in
+    commercial organizations and companies for
+    internal non-commercial purpose. Use in a
+    commercial company for research or evaluation
+    is allowed.</p>
+    
+    
+<p>Parties interested in obtaining the right to
+    use this software for purposes outside the
+    above outlined limits should contact the MIT Technology Licensing
+    Office: <a href="mailto:tlo-www@mit.edu">tlo-www@mit.edu</a>.</p>
+
+    
+    
+<p>In order to obtain the software, we
+    request that you provide information about the
+    research organization, commercial organization
+    or public health organization you belong
+    to. Requests which do not identify the
+    organization you belong to will be denied. We
+    will review your request and email the code to you within a day or so if you are
+    approved.</p>
+    
+    
+<p>The information provided on this form is used
+    solely by our lab to keep of who has a copy of the code. We will never
+    sell or distribute the information provided on
+    this form.</p>
+    
+    
+<h4>AGREEMENT</h4>
+    
+<p>
+      Before being sent the code the researcher must agree:
+      <ol>
+	
+<li>To only give code access to the designated "code users" specified in the download form.</li>
+
+	
+<li>Not to sell the code to other parties.</li>
+	
+<li>Not to sell software built with portions of this
+	code to other parties.</li>
+	
+<li>Not to give away the code to other parties without written
+permission.</li>      
+
+      
+</ol>
+    
+</p>
+    
+<p>
+
+      
+<strong>
+	Requests which do not identify the research organization
+	you belong to will be denied.  Additionally, please, do not abbreviate 
+	your organization name, unless you provide its web address. 
+      </strong>
+    
+</p>
+    
+<p>
+      
+      <strong> 
+	The information submitted on this form will remain private and will never
+	be distributed or sold.
+     </strong>
+
+
+ 
+  <!-- NOTE: the ACTION below must be changed if comments.txt 
+      is ever moved from the directory it is now in:
+      /afs/athena.mit.edu/org/c/cwis/ -->
+  <form action="http://people.csail.mit.edu/brussell/research/labelme_code_request/test3.cgi" method="post">
+    * Name: <br />
+    <input name="name" size="30" /><br />
+    * Email: <br />
+    <input name="email" size="30" /><br />
+    * Organization (no abbreviations): <br />
+    <input name="organization" size="60" /><br />
+    Mail address (including country):<br />
+    <textarea name="mail_address" rows="5" cols="30"></textarea>
+    <p>
+    Names of additional members of your project who will use this code:<br />
+    <textarea name="extra_people" rows="5" cols="30"></textarea>
+    <p>Do you wish to receive an e-mail when the source code is updated?
+    <input type="radio" name="update" value="yes" />Yes /
+    <input type="radio" name="update" value="no" checked="checked" />No
+    </p>
+    <p>
+    <input id="agree" type="checkbox" unchecked onclick="javascript:toggle_submit();" />
+    I agree.
+    </p>
+    <input disabled type="submit" id="download_code" name="submit" value="Send"/>
+    <p>
+
+  </form>
+<script text/javascript>
+document.getElementById('agree').checked=false;
+</script>
+
+  </body>
+ 
+</html>
+        
+ <!--   action="http://web.mit.edu/bin/cgiemail/afs/athena.mit.edu/org/c/cwis/comments.txt"> -->

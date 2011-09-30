@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+ <LINK REL="SHORTCUT ICON" HREF="Icons/favicon16.ico">
+ <META NAME="KEYWORDS"
+ CONTENT="LabelMe, open annotation tool, images, database, matlab, object">
+ <link rel="stylesheet" type="text/css" href="css/estil.css" />
+
+<title>LabelMe: The open annotation tool</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script language="JavaScript" type="text/JavaScript">
+<!--
+function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+}
+MM_reloadPage(true);
+//-->
+</script>
+</head>
+
+
+
+<body bgcolor="#FFFFFF" style="font-family:Arial, Helvetica, Garamond, sans-serif">
+<div id="Layer84" style="position:absolute; left:1004px; bottom:92px; width:53px; height:36px; z-index:86"><img src="Icons/Intro_tmp/river_006.gif" width="45" height="27"></div>
+<div id="Layer85" style="position:absolute; left:1060px; bottom:99px; width:58px; height:59px; z-index:87"><img src="Icons/Intro_tmp/mountain_042.gif" width="49" height="49"></div>
+<div id="Layer93" style="position:absolute; left:170px; bottom:167px; width:67px; height:41px; z-index:93"><img src="Icons/MIT.gif" width="64" height="32"></div>
+<div id="Layer94" style="position:absolute; left:1107px; bottom:112px; width:72px; height:46px; z-index:94"><img src="Icons/Intro_tmp/cabinet_070.gif" width="70" height="40"></div>
+<div id="Layer96" style="position:absolute; left:519px; bottom:109px; width:20px; height:43px; z-index:96"><img src="Icons/Intro_tmp/traffic%20light_081.gif" width="9" height="40"></div>
+<div id="Layer75" style="position:absolute; left:856px; bottom:64px; width:219px; height:66px; z-index:1"><img src="Icons/Intro_tmp/sea_074.gif" width="222" height="61"></div>
+<div id="Layer76" style="position:absolute; left:895px; bottom:110px; width:35px; height:47px; z-index:78"><img src="Icons/Intro_tmp/sailboat_001.gif" width="27" height="40"></div>
+<div id="Layer77" style="position:absolute; left:964px; bottom:94px; width:51px; height:50px; z-index:79"><img src="Icons/Intro_tmp/dolphin_001.gif" width="43" height="40"></div>
+<div id="Layer78" style="position:absolute; left:983px; bottom:23px; width:34px; height:36px; z-index:80"><img src="Icons/Intro_tmp/fish_008.gif" width="26" height="30"></div>
+<div id="Layer79" style="position:absolute; left:1039px; bottom:23px; width:43px; height:49px; z-index:81"><img src="Icons/Intro_tmp/fish_010.gif" width="31" height="40"></div>
+<div id="Layer80" style="position:absolute; left:952px; bottom:22px; width:31px; height:41px; z-index:82"><img src="Icons/Intro_tmp/fish_017.gif" width="26" height="40"></div>
+<div id="Layer81" style="position:absolute; left:874px; bottom:20px; width:48px; height:56px; z-index:83"><img src="Icons/Intro_tmp/fish_007.gif" width="35" height="40"></div>
+<div id="Layer82" style="position:absolute; left:916px; bottom:33px; width:41px; height:38px; z-index:84"><img src="Icons/Intro_tmp/fish_004.gif" width="36" height="40"></div>
+<div id="Layer83" style="position:absolute; left:867px; bottom:80px; width:43px; height:28px; z-index:85"><img src="Icons/Intro_tmp/bird_075.gif" width="38" height="20"></div>
+<div id="Layer55" style="position:absolute; left:796px; bottom:56px; width:55px; height:32px; z-index:58"><img src="Icons/Intro_tmp/river_017.gif" width="54" height="28"></div>
+
+<div id="Layer60" style="position:absolute; left:12px; bottom:60px; width:317px; height:30px; z-index:63">
+  <p><font size="-2">(c) MIT, Computer Science and Artificial Intelligence Laboratory.</font>
+</p></div>
+
+<div id="Layer60" style="position:absolute; left:12px; bottom:27px; width:362px; height:30px; z-index:63"> 
+  <!--WEBBOT bot="HTMLMarkup" startspan ALT="Site Meter" -->
+  <script type="text/javascript" language="JavaScript">var site="s21labelme"</script>
+<script type="text/javascript" language="JavaScript1.2" src="http://s21.sitemeter.com/js/counter.js?site=s21labelme"></script>
+<noscript>
+<p><a href="http://s21.sitemeter.com/stats.asp?site=s21labelme" target="_top">
+<img src="http://s21.sitemeter.com/meter.asp?site=s21labelme" alt="Site Meter" border="0"/></a>
+</p></noscript>
+<!-- Copyright (c)2005 Site Meter -->
+<!--WEBBOT bot="HTMLMarkup" Endspan -->
+</div>
+
+<div id="Layer65" style="position:absolute; left:252px; bottom:88px; width:59px; height:26px; z-index:68"><img src="Icons/Intro_tmp/car%20side_029.gif" width="53" height="22"></div>
+<div id="Layer66" style="position:absolute; left:568px; bottom:41px; width:138px; height:57px; z-index:1"><img src="Icons/Intro_tmp/river_058.gif" width="136" height="50"></div>
+<div id="Layer67" style="position:absolute; left:458px; bottom:198px; width:55px; height:62px; z-index:69"><img src="Icons/Intro_tmp/balloon_001.gif" width="53" height="58"></div>
+<div id="Layer69" style="position:absolute; left:170px; bottom:259px; width:91px; height:46px; z-index:71"><img src="Icons/Intro_tmp/cloud_021.gif" width="87" height="42"></div>
+<div id="Layer2" style="position:absolute; left:83px; bottom:84px; width:49px; height:21px; z-index:6"><img src="Icons/Intro_tmp/car%20side_012.gif" width="45" height="17"></div>
+<div id="Layer4" style="position:absolute; left:31px; bottom:88px; width:60px; height:69px; z-index:4"><img src="Icons/Intro_tmp/building_047.gif" width="55" height="63"></div>
+<div id="Layer5" style="position:absolute; left:90px; bottom:93px; width:79px; height:64px; z-index:5"><img src="Icons/Intro_tmp/building_001.gif" width="74" height="60"></div>
+<div id="Layer6" style="position:absolute; left:163px; bottom:95px; width:82px; height:80px; z-index:6"><img src="Icons/Intro_tmp/building_051.gif" width="78" height="78"></div>
+<div id="Layer7" style="position:absolute; left:241px; bottom:95px; width:72px; height:72px; z-index:7"><img src="Icons/Intro_tmp/building_066.gif" width="67" height="67"></div>
+<div id="Layer8" style="position:absolute; left:319px; bottom:93px; width:79px; height:69px; z-index:8"><img src="Icons/Intro_tmp/building_032.gif" width="79" height="60"></div>
+<div id="Layer1" style="position:absolute; left:70px; bottom:100px; width:37px; height:43px; z-index:9"><img src="Icons/Intro_tmp/tree_048.gif" width="34" height="42"></div>
+<div id="Layer9" style="position:absolute; left:222px; bottom:84px; width:70px; height:29px; z-index:10"><img src="Icons/Intro_tmp/road_056.gif" width="63" height="22"></div>
+<div id="Layer10" style="position:absolute; left:7px; bottom:88px; width:44px; height:56px; z-index:11"><img src="Icons/Intro_tmp/tree_030.gif" width="42" height="53"></div>
+<div id="Layer12" style="position:absolute; left:-2px; bottom:84px; width:13px; height:32px; z-index:13"><img src="Icons/Intro_tmp/person%20walking_021.gif" width="11" height="26"></div>
+<div id="Layer11" style="position:absolute; left:616px; bottom:197px; width:95px; height:31px; z-index:14"><img src="Icons/Intro_tmp/cloud_034.gif" width="94" height="32"></div>
+<div id="Layer13" style="position:absolute; left:779px; bottom:198px; width:74px; height:23px; z-index:15"><img src="Icons/Intro_tmp/cloud_047.gif" width="73" height="23"></div>
+<div id="Layer14" style="position:absolute; left:-7px; bottom:211px; width:73px; height:41px; z-index:16;"><img src="Icons/Intro_tmp/cloud_055.gif" width="71" height="39"></div>
+<div id="Layer15" style="position:absolute; left:485px; bottom:98px; width:16px; height:29px; z-index:17"><img src="Icons/Intro_tmp/person%20walking_069.gif" width="12" height="25"></div>
+<div id="Layer16" style="position:absolute; left:511px; bottom:98px; width:10px; height:28px; z-index:18"><img src="Icons/Intro_tmp/person%20walking_070.gif" width="8" height="25"></div>
+<div id="Layer17" style="position:absolute; left:556px; bottom:88px; width:19px; height:36px; z-index:19"><img src="Icons/Intro_tmp/person%20walking_067.gif" width="15" height="31"></div>
+<div id="Layer18" style="position:absolute; left:503px; bottom:96px; width:16px; height:31px; z-index:20"><img src="Icons/Intro_tmp/person%20walking_080.gif" width="12" height="24"></div>
+<div id="Layer19" style="position:absolute; left:580px; bottom:92px; width:10px; height:32px; z-index:21"><img src="Icons/Intro_tmp/person%20walking_086.gif" width="9" height="30"></div>
+<div id="Layer20" style="position:absolute; left:527px; bottom:95px; width:17px; height:29px; z-index:22"><img src="Icons/Intro_tmp/person%20walking_088.gif" width="15" height="27"></div>
+<div id="Layer21" style="position:absolute; left:429px; bottom:90px; width:168px; height:30px; z-index:1"><img src="Icons/Intro_tmp/road_063.gif" width="167" height="29"></div>
+<div id="Layer22" style="position:absolute; left:392px; bottom:97px; width:98px; height:67px; z-index:24"><img src="Icons/Intro_tmp/building_028.gif" width="96" height="66"></div>
+<div id="Layer23" style="position:absolute; left:302px; bottom:90px; width:15px; height:34px; z-index:25"><img src="Icons/Intro_tmp/person%20walking_023.gif" width="13" height="31"></div>
+<div id="Layer24" style="position:absolute; left:494px; bottom:94px; width:11px; height:33px; z-index:26"><img src="Icons/Intro_tmp/person%20walking_027.gif" width="9" height="30"></div>
+<div id="Layer25" style="position:absolute; left:543px; bottom:93px; width:11px; height:35px; z-index:27"><img src="Icons/Intro_tmp/person%20walking_039.gif" width="9" height="32"></div>
+<div id="Layer26" style="position:absolute; left:523px; bottom:90px; width:96px; height:76px; z-index:2"><img src="Icons/Intro_tmp/building_033.gif" width="87" height="81"></div>
+<div id="Layer27" style="position:absolute; left:356px; bottom:72px; width:42px; height:37px; z-index:28"><img src="Icons/Intro_tmp/motorbike_017.gif" width="34" height="28"></div>
+<div id="Layer28" style="position:absolute; left:610px; bottom:82px; width:83px; height:75px; z-index:29"><img src="Icons/Intro_tmp/mountain_004.gif" width="77" height="65"></div>
+<div id="Layer29" style="position:absolute; left:717px; bottom:94px; width:40px; height:36px; z-index:30"><img src="Icons/Intro_tmp/mountain_001.gif" width="35" height="30"></div>
+<div id="Layer30" style="position:absolute; left:690px; bottom:70px; width:29px; height:29px; z-index:31"><img src="Icons/Intro_tmp/mountain_014.gif" width="24" height="21"></div>
+<div id="Layer31" style="position:absolute; left:582px; bottom:53px; width:39px; height:38px; z-index:32"><img src="Icons/Intro_tmp/mountain_015.gif" width="35" height="31"></div>
+<div id="Layer32" style="position:absolute; left:680px; bottom:117px; width:84px; height:55px; z-index:31"><img src="Icons/Intro_tmp/mountain_056.gif" width="81" height="50"></div>
+<div id="Layer33" style="position:absolute; left:730px; bottom:72px; width:56px; height:56px; z-index:32"><img src="Icons/Intro_tmp/river_061.gif" width="59" height="50"></div>
+<div id="Layer34" style="position:absolute; left:746px; bottom:95px; width:88px; height:82px; z-index:52"><img src="Icons/Intro_tmp/tree_026.gif" width="81" height="69"></div>
+<div id="Layer35" style="position:absolute; left:764px; bottom:76px; width:140px; height:48px; z-index:34"><img src="Icons/Intro_tmp/grass_028.gif" width="103" height="34"></div>
+<div id="Layer41" style="position:absolute; left:1066px; bottom:68px; width:123px; height:53px; z-index:36"><img src="Icons/Intro_tmp/table_067.gif" width="116" height="50"></div>
+<div id="Layer48" style="position:absolute; left:811px; bottom:88px; width:64px; height:58px; z-index:51"><img src="Icons/Intro_tmp/mountain_012.gif" width="57" height="50"></div>
+<div id="Layer49" style="position:absolute; left:728px; bottom:194px; width:38px; height:18px; z-index:53"><img src="Icons/Intro_tmp/bird_059.gif" width="36" height="16"></div>
+<div id="Layer50" style="position:absolute; left:629px; bottom:168px; width:35px; height:23px; z-index:54"><img src="Icons/Intro_tmp/bird_041.gif" width="32" height="20"></div>
+<div id="Layer51" style="position:absolute; left:821px; bottom:177px; width:36px; height:15px; z-index:55"><img src="Icons/Intro_tmp/bird_061.gif" width="31" height="13"></div>
+<div id="Layer52" style="position:absolute; left:687px; bottom:77px; width:94px; height:56px; z-index:1"><img src="Icons/Intro_tmp/sand_028.gif" width="91" height="50"></div>
+<div id="Layer54" style="position:absolute; left:232px; bottom:238px; width:65px; height:22px; z-index:57"><a href="http://people.csail.mit.edu/torralba/research/LabelMe/js/LabelMeQueryObjectFast.cgi/?query=airplane"><img src="Icons/Intro_tmp/plane_021.gif" width="62" height="18" border="0"></a></div>
+<div id="Layer3" style="position:absolute; width:49px; height:23px; z-index:7; left:175px; bottom:85px;"><img src="Icons/Intro_tmp/car%20side_001.gif" width="44" height="17"></div>
+<div id="Layer56" style="position:absolute; left:27px; top:14px; width:222px; height:68px; z-index:102"><img src="Icons/LabelMeNEWtight198x55.gif"></div>
+<div id="Layer57" style="position:absolute; left:27px; top:68px; width:621px; height:31px; z-index:103"><em>Written 
+  by </em><a href="http://people.csail.mit.edu/brussell">Bryan Russell</a>, <a href="http://web.mit.edu/torralba/www/">Antonio Torralba</a> and <a href="http://people.csail.mit.edu/billf/">William T. Freeman</a></div>
+<div id="Layer58" style="position:absolute; left:246px; top:45px; width:380px; height:28px; z-index:104"><strong><font face="Verdana, Arial, Helvetica, sans-serif">The 
+  open annotation tool</font></strong></div>
+<div id="Layer59" style="position:absolute; left:24px; top:26px; width:1137px; height:38px; z-index:105; border-bottom:2px solid #666666"></div>
+
+
+
+<div id="Layer62" style="position:absolute; left:27px; top:144px; z-index:107"> 
+  <img src="Icons/button1.png" width="214" height="45" border="0"> 
+  <div id="textbutton1" style="position:absolute; top:12px; left:22px; font-size:24px; color:#000000; width: 213px; height: 27px;"><a href="guidelines.html" class="button1">Annotation 
+    tool</a> </div>
+</div>
+
+<div id="Layer62" style="position:absolute; left:27px; top:217px; z-index:107"> 
+  <img src="Icons/button3.png"  border="0"> 
+  <div id="textbutton3" style="position:absolute; top:8px; left:22px; font-size:24px; color:#000000; width: 186px; height: 27px;"><a href="http://labelme.csail.mit.edu/LabelMeToolbox/index.html" class="button3">Matlab 
+    toolbox </a></div>
+</div>
+<div id="Layer62" style="position:absolute; left:27px; top:289px; z-index:107"> 
+  <img src="Icons/button4.png"  border="0"> 
+  <div id="textbutton2" style="position:absolute; top:10px; left:22px; font-size:24px; color:#000000; width: 176px; height: 27px;"><a href="http://people.csail.mit.edu/torralba/benchmarks/" class="button4">Benchmarks 
+    </a></div>
+</div>
+<div id="Layer62" style="position:absolute; left:29px; top:339px; z-index:107"> 
+  <img src="Icons/button5.png" width="251" height="78"  border="0"> 
+  <div id="textbutton4" style="position:absolute; top:42px; left:29px; font-size:24px; color:#000000; width: 137px; height: 27px;"><a href="LabelMe3D/labelme3D.html" class="button2">3D pop-up!</a></div>
+</div>
+
+<div id="Layer62" style="position:absolute; left:27px; top:429px; z-index:107"> 
+  <img src="Icons/button1.png" width="214" height="45" border="0"> 
+  <div id="textbutton1" style="position:absolute; top:12px; left:22px; font-size:24px; color:#000000; width: 213px; height: 27px;"><a href="mechanicalturk.html" class="button1">Mechanical 
+    Turk</a> </div>
+</div>
+
+<div id="Layer62" style="position:absolute; left:456px; top:469px; z-index:107"> 
+  <div id="textbutton1" style="position:absolute; top:0px; left:6px; font-size:24px; color:#000000; width: 213px; height: 27px;"><a href="http://labelme.csail.mit.edu/VideoLabelMe" class="button1">visit LabelMe video</a> </div>
+</div>
+
+<img src="Icons/logo2.jpg" style="display:none;" />
+<!-- <div id="Layer61" style="position:absolute; left:344px; top:141px; width:440px; height:325px; z-index:108"><img src="Icons/sketch.png" width="429" height="322"></div> -->
+<!--<div id="Layer61" style="position:absolute; left:344px; top:141px; width:440px; height:325px; z-index:108"><a href="http://people.csail.mit.edu/torralba/research/LabelMe/labelmeMap"><img id="labelmemap" src="Icons/logo1.jpg" onMouseOver="javascript:document.getElementById('labelmemap').src='Icons/logo2.jpg';" onMouseOut="javascript:document.getElementById('labelmemap').src='Icons/logo1.jpg';" width="429" height="322" /></a></div> -->
+
+<div id="Layer61" style="position:absolute; left:344px; top:141px; width:429px; height:322px; z-index:108; border:solid black 1px;">
+<a href="http://labelme.csail.mit.edu/VideoLabelMe/">
+<object width="429" height="322">
+<param name="movie" value="LabelMeVideo.swf">
+<embed src="LabelMeVideo.swf" width="429" height="322">
+</embed>
+</object>
+</a>
+</div>
+
+
+<div id="Layer63" style="position:absolute; left:861px; top:121px; z-index:109"><img src="Icons/menu1.png"> 
+  <div style="position:absolute; left:16px; top:17px; width:93px; height:29px; z-index:110">Search</div>
+  <div style="position:absolute; left:158px; top:12px; width:75px; height:29px; z-index:110"><b><a href="http://people.csail.mit.edu/torralba/research/LabelMe/js/LabelMeQueryObjectFast.cgi" class="menu1">Objects</a></b></div>
+  <div style="position:absolute; left:158px; top:36px; width:74px; height:29px; z-index:110"><b><a href="http://people.csail.mit.edu/torralba/research/LabelMe/js/LabelMeQueryFast.cgi" class="menu1">Scenes</a></b></div>
+</div>
+
+<div id="Layer63" style="position:absolute; left:861px; top:191px; z-index:109"><img src="Icons/menu2.png"> 
+  <div style="position:absolute; left:15px; top:14px; width:93px; height:29px; z-index:110">Explore</div>
+  <div style="position:absolute; left:158px; top:4px; width:75px; height:29px; z-index:110"><b><a href="http://labelme.csail.mit.edu/browseLabelMe/index.html"  class="menu2">Images</a></b></div>
+  <div style="position:absolute; left:158px; top:59px; width:145px; height:29px; z-index:110"><b><a href="http://people.csail.mit.edu/torralba/LabelMeArt/LabelMeGallery.html" class="menu2">Art 
+    gallery</a></b></div>
+  <div style="position:absolute; left:158px; top:33px; width:88px; height:29px; z-index:110"><b><a href="http://people.csail.mit.edu/torralba/research/LabelMe/labelmeMap" class="menu2">Visual map</a></b></div>
+</div>
+
+<div id="Layer63" style="position:absolute; left:861px; top:281px; z-index:109"><img src="Icons/menu3.png"> 
+  <div style="position:absolute; left:15px; top:10px; width:93px; height:29px; z-index:110">Download</div>
+  <div style="position:absolute; left:158px; top:5px; width:168px; height:21px; z-index:110"><b><a href="http://labelme.csail.mit.edu/LabelMeToolbox/index.html" class="menu3">Matlab 
+    toolbox</a></b></div>
+  <div style="position:absolute; left:158px; top:44px; width:94px; height:21px; z-index:110"><b><a href="instructions.html" class="menu3">Dataset</a></b></div>
+  <div style="position:absolute; left:157px; top:25px; width:167px; height:20px; z-index:110"><b><a href="http://labelme.csail.mit.edu/Documentation/sourceCode.html" class="menu3">LabelMe
+    Source</a></b></div>
+</div>
+
+<div id="Layer63" style="position:absolute; left:861px; top:350px; z-index:109"><img src="Icons/menu4.png"> 
+  <div style="position:absolute; left:15px; top:10px; width:93px; height:29px; z-index:110">Help</div>
+  <div style="position:absolute; left:158px; top:6px; width:75px; height:29px; z-index:110"><b><a href="http://people.csail.mit.edu/brussell/research/AIM-2005-025-new.pdf" class="menu4">Publications</a></b></div>
+  <div style="position:absolute; left:158px; top:32px; width:94px; height:29px; z-index:110"><b><a href="faq.html"  class="menu4">Faq</a></b></div>
+</div>
+
+<div id="Layer63" style="position:absolute; left:861px; top:412px; z-index:109"><img src="Icons/menu5.png"> 
+  <div style="position:absolute; left:15px; top:10px; width:93px; height:29px; z-index:110">Extensions</div>
+  <div style="position:absolute; left:158px; top:6px; width:75px; height:29px; z-index:110"><b><a href="http://people.csail.mit.edu/torralba/research/LabelMe/wordnet/test.html" class="menu5">Wordnet</a></b></div>
+  <div style="position:absolute; left:158px; top:28px; width:94px; height:29px; z-index:110"><b><a href="http://www.quicktopic.com/37/H/E4xRZ7fZZhh" class="menu5">Discussion</a></b></div>
+</div>
+
+
+
+</body>
+</html>

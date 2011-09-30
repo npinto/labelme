@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+ <LINK REL="SHORTCUT ICON" HREF="Icons/favicon16.ico">
+ <META NAME="KEYWORDS"
+ CONTENT="LabelMe, open annotation tool, images, database, matlab, object">
+ <link rel="stylesheet" type="text/css" href="css/estil.css" />
+
+<title>LabelMe: The open annotation tool</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script language="JavaScript" type="text/JavaScript">
+<!--
+function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+}
+MM_reloadPage(true);
+//-->
+</script>
+</head>
+
+<!--
+<body bgcolor="#FFFFFF" style="font-family:Arial, Helvetica, Garamond, sans-serif; font-size:12px;">
+
+<p>
+<img src="Icons/LabelMeNEWtight198x55.gif">&nbsp;&nbsp;&nbsp;<img src="Icons/LM3d.png" width="42" height="43">
+</p>
+
+<table style="width:510px">
+<tr>
+<td>
+  <p>
+When you label objects and their location in an image, the tool uses
+the labels to build a 3D model of the scene. The tool does not require
+from you any knowledge about geometry, as all of the 3D information is
+automatically inferred from the annotations. For instance, the tool
+will know that a 'road' is a horizontal surface and that a 'car' is
+supported by the road. The tool learns to go from 2D to 3D using all
+the other labels already present in the database. The more images that
+are labeled, the better models the tool will learn.
+  </p>
+
+  <p>
+The tool learns two kinds of scene representations from all the
+annotated images: a qualitative model of the relationships
+(&quot;part-of&quot;', &quot;supports'') holding between scene
+components (&quot;sidewalk'', &quot;person'', &quot;car''), and a
+rough 3D shape model for some of these components, obtained from
+multiple segmented images of their instances. These models are
+combined with geometric cues (depth ordering, horizon line) extracted
+from the photograph being analyzed to construct the final scene
+description. 
+  </p>
+  <p>
+For instance, when we (as human beings) see a person against a wall,
+we know that the person is not physically attached to the wall. We
+know this because we know that people are not parts of walls as we
+have learned this from all the other images in which we see
+co-occurrences of people and walls. We also know that windows are
+parts of walls, therefore a window overlapping with a wall is not a
+window resting against the wall, it is actually attached to it.
+Furthermore, we know this because we again exploit the information
+coming from many images and how walls and windows relate to each
+other. These relationships influence (and are influenced by) our
+interpretation of geometric image cues.
+</p>
+
+<p>
+For example statistical evidence may guide the interpretation of edge
+fragments as occlusion boundaries, contacts between objects, or
+attachment points. For instance, a chimney is part of a house.  Only
+the lower part of the boundary is attached to the house, with the rest
+being an occlusion boundary. On the other hand, a window is a part of
+a house, but all the edges are attached to the building and there are
+no occlusions. Then, a person is always in contact with the road, but,
+because a person is not part of the road, the points of contact are
+not points of attachment.
+</p>
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+-->
+
+<body bgcolor="#FFFFFF" style="font-family:Arial, Helvetica, Garamond, sans-serif; font-size:12px;">
+<div id="Layer56" style="position:absolute; left:27px; top:14px; width:222px; height:68px; z-index:102"><img src="Icons/LabelMeNEWtight198x55.gif"></div>
+<div id="Layer3" style="position:absolute; left:28px; top:92px; width:538px; height:1098px; z-index:1; font-size:12px;"> 
+  <p><strong><font size="3">Building a Database of 3D Scenes from User Annotations</font></strong></p>
+  <p><a href="http://people.csail.mit.edu/brussell">Bryan Russell</a>, <a href="http://people.csail.mit.edu/jdvs">and 
+    </a><a
+  href="http://web.mit.edu/torralba/www/">Antonio Torralba</a><br>
+    <br>
+    IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2009 <br>
+    (<a href="http://www.di.ens.fr/~russell/papers/LabelMe3D.pdf"><font color="#FF0000">paper.pdf</font></a>) 
+  </p>
+  <p><font size="4">How to get good 3D models?</font></p>
+  <p>When you label objects and their location in an image, the tool uses the 
+    labels to build a 3D model of the scene. The tool does not require from you 
+    any knowledge about geometry, as all of the 3D information is automatically 
+    inferred from the annotations. For instance, the tool will know that a 'road' 
+    is a horizontal surface and that a 'car' is supported by the road. The tool 
+    learns to go from 2D to 3D using all the other labels already present in the 
+    database. The more images that are labeled, the better models the tool will 
+    learn. </p>
+  <p>In order to get good 3D and pop-up models of your pictures, it is important 
+    to try to label accurately. For each object that you label, the tool will 
+    ask you to enter the name. The system will use this name to decide which 3D 
+    model to use. </p>
+  <p><strong>Start labeling the ground: </strong>Ground objects (such as the &quot;road&quot;, 
+    &quot;sidewalk&quot;, &quot;floor&quot;, &quot;sea&quot;, etc) are used to 
+    define the basic structure of the scene. If you use the correct names, the 
+    system will recognize them and automatically place them in the correct location 
+    in the 3D scene.</p>
+  <p><strong>Complete objects behind the occlusions: </strong>When labeling objects, 
+    try to complete the objects behind the occlusions. This is
+    important so that the tool can reconstruct the 3D contact points. In the example on the right, 
+    the sidewalk is delineated as if the people were not there.</p>
+  <p><strong>Follow the outline of each object:</strong> The more accurate the 
+    boundaries and the object names are, the better the 3D model will look. In 
+    addition, these annotations will be used to build a large database of annotated 
+    images to train computer vision algorithms to recognize everyday objects.</p>
+  <p><font size="4">How does it work?</font></p>
+  <p>
+The tool learns two kinds of scene representations from all the
+annotated images: a qualitative model of the relationships
+(&quot;part-of&quot;', &quot;supports'') holding between scene
+components (&quot;sidewalk'', &quot;person'', &quot;car''), and a
+rough 3D shape model for some of these components, obtained from
+multiple segmented images of their instances. These models are
+combined with geometric cues (depth ordering, horizon line) extracted
+from the photograph being analyzed to construct the final scene
+description. 
+  </p>
+  <p>
+To illustrate the above, consider when we (as humans) see a person
+against a wall.
+We know that the person is not physically attached to the wall because
+people are not parts of walls.  We
+have learned this from many images in which we see the
+co-occurrence of people and walls. We also know that windows are
+parts of walls.  Therefore a window overlapping with a wall is not a
+window resting against the wall, it is actually attached to it.
+Again, we know this because we exploit the information
+coming from many images and how walls and windows relate to each
+other. These relationships influence (and are influenced by) our
+interpretation of geometric image cues.
+</p>
+
+  <p> In addition, statistical evidence may guide the interpretation of edge fragments 
+    as occlusion boundaries, contacts between objects, or attachment points. For 
+    instance, a chimney is part of a house. However, only the lower part of the 
+    boundary is attached to the house, with the rest being an occlusion boundary. 
+    On the other hand, a window is a part of a house, with all the edges attached 
+    to the building and having no occlusions. As a final example, a person is 
+    always in contact with the road. However, a person is not part of the road, 
+    which causes the points of contact to not be points of attachment. </p>
+  <p><font size="4">Related work</font></p>
+  <p>There are a number of previous works from which we have taken inspiration:</p>
+  <p>Y. Horry, K.I. Anjyo and K. Arai. &quot;Tour Into the Picture: Using a spidery 
+    mesh user interface to make animation from a single image&quot;. ACM SIGGRAPH 
+    1997 (<a href="http://www.mizuno.org/gl/tip/">website</a>)</p>
+  <p>
+  A. Criminisi, I. Reid, and A. Zisserman. &quot;Single View Metrology&quot;.
+  Proceedings of the 7th International Conference on Computer Vision,
+  Kerkyra, Greece, 1999. (<a href="http://www.robots.ox.ac.uk/~vgg/projects/SingleView/">website</a>)
+  </p>
+  <p>D. Hoiem, A.A. Efros, and M. Hebert, &quot;Automatic Photo Pop-up&quot;, 
+    ACM SIGGRAPH 2005. (<a href="http://www.cs.uiuc.edu/homes/dhoiem/projects/popup/index.html">website</a>)</p>
+  <p> A. Saxena, M. Sun, A. Y. Ng. &quot;Learning 3-D Scene Structure from a Single 
+    Still Image&quot;. In ICCV workshop on 3D Representation for Recognition (3dRR-07), 
+    2007 (<a href="http://make3d.stanford.edu/index.html">website</a>)</p>
+  <p>&nbsp;</p>
+
+  <p><font size="-2">This work is the result of a collaboration between the <a href="http://www.csail.mit.edu/"><font color="#FF0000">Computer 
+    Science and Artificial Intelligence Laboratory</font></a> at MIT and the INRIA 
+    (<a href="http://www.di.ens.fr/willow/"><font color="#FF0000">Willow project-team</font></a>, 
+    Laboratoire d'Informatique de l'&Eacute;cole Normale Sup&eacute;rieure, ENS/INRIA/CNRS 
+    UMR 8548). Funding for this research was provided by National Science Foundation 
+    Career award (IIS 0747120). </font></p>
+
+   <!-- Copyright (c)2005 Site Meter -->
+<!--WEBBOT bot="HTMLMarkup" Endspan -->
+ <!--WEBBOT bot="HTMLMarkup" startspan ALT="Site Meter" -->
+  <script type="text/javascript" language="JavaScript">var site="s21labelme"</script>
+<script type="text/javascript" language="JavaScript1.2" src="http://s21.sitemeter.com/js/counter.js?site=s21labelme"></script>
+<noscript>
+<p><a href="http://s21.sitemeter.com/stats.asp?site=s21labelme" target="_top">
+<img src="http://s21.sitemeter.com/meter.asp?site=s21labelme" alt="Site Meter" border="0"/></a>
+</p></noscript>
+
+</div>
+  
+  
+<div id="Layer4" style="position:absolute; left:241px; top:13px; width:51px; height:55px; z-index:112"><img src="Icons/LM3d.png" width="42" height="43"></div>
+
+<div id="Layer1" style="position:absolute; left:584px; top:698px; width:258px; height:421px; z-index:113"> 
+  <p><img src="Icons/supportGraph.jpg" width="256" height="349"></p>
+  <p>List of objects supported by the road. This list is automatically inferred 
+    from the annotations available in the LabelMe dataset.</p>
+</div>
+<div id="Layer8" style="position:absolute; left:595px; top:96px; width:266px; height:582px; z-index:117"> 
+  <p><img src="Icons/intro3Db.jpg" width="243" height="168"></p>
+  <p><img src="Icons/intro3Dc.jpg" width="242" height="175"></p>
+  <p><img src="Icons/3Dsmall.jpg" width="243" height="135"></p>
+  <p>The 3D models can be downloaded and played outside of this tool using any 
+    VRML viewer.</p>
+</div>
+</body>
+</html>

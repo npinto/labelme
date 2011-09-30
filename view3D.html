@@ -1,0 +1,351 @@
+<html>
+<head>
+<title>View LabelMe 3D model</title>
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE,NO-STORE,MUST-REVALIDATE" />
+ <LINK REL="SHORTCUT ICON" HREF="Icons/favicon16.ico" />
+ <META NAME="KEYWORDS"
+ CONTENT="LabelMe, open annotation tool, images, database, matlab, object, 3D" />
+
+<script type="text/javascript">
+function Init() {
+var folder, image;
+var url = document.URL;
+var idx = url.indexOf('?');
+while(idx!=-1) {
+  var url = url.substring(idx+1,url.length);
+  idx = url.indexOf('&');
+  if(idx!=-1) assignment = url.substring(0,idx);
+  else assignment = url;
+  var field = assignment.substring(0,assignment.indexOf('='));
+  var value = assignment.substring(assignment.indexOf('=')+1,assignment.length);
+  if(field=='folder') folder = value;
+  if(field=='image') image = value.substring(0,value.indexOf('.jpg'));
+}
+
+document.getElementById('view_icon').href = '3D/' + folder + '/' + image + '.wrl';
+document.getElementById('view_link1').href = '3D/' + folder + '/' + image + '.wrl';
+document.getElementById('view_link2').href = '3D/' + folder + '/' + image + '.wrl';
+
+document.getElementById('dload_icon').href = '3D/' + folder + '/' + image + '.zip';
+document.getElementById('dload_link1').href = '3D/' + folder + '/' + image + '.zip';
+document.getElementById('dload_link2').href = '3D/' + folder + '/' + image + '.zip';
+document.getElementById('dload_link3').href = '3D/' + folder + '/' + image + '.zip';
+
+document.getElementById('book_icon').href = '3D/' + folder + '/' + image + '_book.jpg';
+document.getElementById('book_link1').href = '3D/' + folder + '/' + image + '_book.jpg';
+document.getElementById('book_link2').href = '3D/' + folder + '/' + image + '_book.jpg';
+
+document.getElementById('image_link').href = 'tool.html?folder=' + folder + '&image=' + image + '.jpg';
+}
+
+</script>
+
+</head>
+
+<body bgcolor="#FFFFFF" style="font-family:Arial, Helvetica, Garamond, sans-serif; width:48em; margin-left:1.5em;">
+
+<table>
+<tr>
+<td><img src="Icons/LabelMeNEWtight198x55.gif" /></td>
+<td>
+<table>
+<tr><td><img src="Icons/LM3d.png" width="42" height="43" /></td></tr>
+<tr><td><strong><font face="Verdana, Arial, Helvetica, sans-serif">now in 3D!</font></strong></td></tr>
+</table>
+</td>
+</tr>
+</table>
+
+<br />
+
+<p>
+<b>Click on one of the icons to download the appropriate model for the
+<a id="image_link">labeled image</a>:</b>
+</p>
+
+<p>
+<center>
+<table>
+<tr>
+<td align="center"><a id="view_icon"><img src="Icons/view3D.jpg" style="height:10em; border:0em;" /></a></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td align="center"><a id="dload_icon"><img src="Icons/LM3d.png" style="border:0em;" /></a></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td align="center"><a id="book_icon"><img src="Icons/book3D.jpg" style="height:10em; border:0em;" /></a></td>
+</tr>
+<td align="center"><a id="view_link1"><b>View 3D</b></a></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td align="center"><a id="dload_link1"><b>Download 3D files</b></a></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td align="center"><a id="book_link1"><b>3D book</b></a></td>
+</tr>
+<tr>
+<td align="center">If VRML browser plugin is installed</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td align="center">Save 3D files</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td align="center">Make your own pop-up book!</td>
+</table>
+</center>
+</p>
+
+<br />
+
+<p>
+<font style="color:ff0000; font-size:1.2em;"><b>Note</b></font> 
+&nbsp;If the above links do not work, do not worry.  This may be due
+to one of the following reasons:
+<br />1. The system needs some time to generate the files
+(especially for the pop-up book).
+Please wait a moment for the system to finish producing
+the files and click on the link again.
+<br />2. The 3D model starts to be produced when there are at least 5
+labeled objects.  Also, the following <a href="http://people.csail.mit.edu/torralba/labelme/description3D.html">labeling
+guidelines</a> may be useful.  Please continue labeling and try again.
+</p>
+
+<!--
+<p>
+<font style="color:ff0000; font-size:1.2em;"><b>Note</b></font> The system may need some time to generate the files
+(especially for the pop-up book). If the link does not work, do not
+worry.  Please wait a moment for the system to finish producing
+the model and click on the link again.
+</p>
+-->
+
+<br />
+
+<p>
+<font style="font-size:1.5em;">
+<b>To view the 3D model</b>
+</font>
+</p>
+
+<p>
+<b>Windows (Firefox or IE browsers only):</b>
+</p>
+
+<p>
+1. Install a VRML viewer plugin (we tested <a href="http://www.parallelgraphics.com/products/cortona/download">Cortona</a> and <a href="http://cic.nist.gov/vrml/cosmoplayer.html#AUTOMATIC">Cosmo</a>).
+<br />
+2. <a id="view_link2">View the 3D model</a>.
+</p>
+
+<p>
+<b>Mac (Firefox browsers only):</b>
+</p>
+
+<p>
+1. Install a VRML viewer (try <a href="http://www.octaga.com/joomla/index.php?option=com_content&task=view&id=17&Itemid=40">Octaga</a>,
+<a href="http://www.apple.com/downloads/macosx/imaging_3d/freewrlvrmlx3dviewer.html">FreeWRL</a>, or 
+<a href="http://www.parallelgraphics.com/products/cortona/download">Cortona</a>).
+<br />
+2. <a id="dload_link2">Download the 3D files</a>.  
+<br />
+3. After the download finishes, unzip the files and double-click on
+the .wrl file.
+</p>
+
+<p>
+<b>Linux (Firefox browsers only):</b>
+</p>
+
+<p>
+1. Install a VRML viewer (try <a href="http://openvrml.org">OpenVRML.org</a>).
+<br />
+2. <a id="dload_link3">Download the 3D files</a>.  
+<br />
+3. After the download finishes, unzip the files and double-click on
+the .wrl file.
+</p>
+
+<p>
+<font style="font-size:1.5em;">
+<b>Navigating the 3D model</b>
+</font>
+</p>
+
+<p>
+While you are in the VRML viewer, you may zoom, rotate, and translate
+the 3D scene. Most VRML viewers will have a navigation panel at the
+bottom of the viewer. Please consult your VRML viewer's documentation
+for more information. 
+</p>
+
+<p>
+<font style="font-size:1.5em;">
+<b>Make your own 3D pop-up book!</b>
+</font>
+</p>
+
+<p>
+You can have fun away from your computer.  Simply:
+</p>
+
+<p>
+1. <a id="book_link2">Download the 3D template</a> (if the link is
+broken, it means that the book has not been generated yet; please wait
+a few minutes and try again).
+<br />
+2. Cut out the pieces.
+<br />
+3. Affix the color-coded tabs to the matching color pattern in the ground
+pieces.
+<br />
+4. Voila!  You have your 3D scene.
+</p>
+
+<br />
+<br />
+
+<font style="font-size:0.7em;">
+<p>
+Disclaimer: LabelMe and the Massachusetts Institute of Technology have no
+liability of any kind or nature in connection with your use of the
+LabelMe software, including liability for any consequential or
+incidental damages or damage to your computer hardware or software or
+self (with the latter possibly resulting from the construction of the 3D
+pop-up book - be careful, scissors are sharp!),
+and the entire risk of use (including without limitation any damage to
+your computer hardware or software) resides with you.
+</p>
+
+<p>
+You expressly agree that the use of LabelMe and the internet is
+at your sole risk.  LabelMe is provided on an "as is" and "as
+available" basis for your use, without warranties of any kind, either
+express or implied, unless such warranties are legally incapable of
+exclusion.  LabelMe provides the service on a reasonable basis
+and does not guarantee that you will be able to access or use the
+service at times or locations of your choosing, or that LabelMe
+will have adequate capacity for the service as a whole or in any
+specific geographic area.
+</p>
+
+<p>
+&copy 2008 Massachusetts Institute of Technology, all rights reserved.
+</p>
+</font>
+
+<!--
+<p>
+Disclaimer: The results provided by our system is provided "as is"
+without warranty of any kind.  
+We do not take responsibility for errors produced by our system or for
+any injuries resulting from the construction of the 3D pop-up book (be
+careful, scissors are sharp!).
+</p>
+-->
+
+<!--
+<p>
+<b>Proprietary Rights</b>
+</p>
+
+<p>
+Much of the content available on LabelMe is owned by the Massachusetts
+Institute of Technology and is protected by copyrights and other
+intellectual property rights.
+</p>
+
+<p>
+The images presented by LabelMe are selected at random from the World
+Wide Web and may be protected by copyrights. Although you can come
+across and access the images through our service, we cannot grant you
+any rights to use them for any purpose other than for labeling them
+and creating 3D outputs. Accordingly, if you would like to use any
+images you have come across through our service, we advise you to
+contact the site owner to obtain the requisite permissions.
+</p>
+
+<p>
+<b>Appropriate Online Content</b>
+</p>
+
+<p>
+By "Content," we mean the software, labels, actions, images,
+and all the material and information you see on our
+Service. LabelMe does not pre-screen all Content available on
+our Service. LabelMe does not assume any responsibility or
+liability for Content that is obtained at random from the World Wide
+Web or provided by members or other guests on
+LabelMe. LabelMe does not endorse, approve, or prescreen
+any Content that you or other users communicate on the Service. We
+reserve the right to remove Content that is objectionable to us for
+any reason. LabelMe does not assume any liability for any
+failure to remove, or any delay in removing, Content. You bear the
+entire risk of the completeness, accuracy or usefulness of Content
+found on our Service.
+</p>
+
+<p>
+Members and other guests may generate Content while using
+LabelMe. This kind of Content must reflect our standards, and we may
+remove it if, in our best judgment, it does not meet those
+standards. 
+</p>
+
+<p>
+<b>Online Conduct</b>
+</p>
+
+<p>
+You agree that you will be personally responsible for your use of the
+Service and for all of your communication and activity on the Service,
+including any Content you contribute, and that you will indemnify and
+hold harmless Massachusetts Institute of Technology from any liability
+or damages arising from your conduct on LabelMe, including any Content
+that you contribute. Online conduct should be guided by common sense and
+basic etiquette. You will violate the Terms of Service if you do any
+of the following:
+</p>
+
+<p>
+Promote or encourage any illegal activity including hacking, cracking
+or distribution of counterfeit software.
+</p>
+
+<p>
+<b>Content Submitted Or Made Available For Inclusion On The Service</b>
+</p>
+
+<p>
+Massachusetts Institute of Technology claims ownership of Content you
+submit or make available for inclusion on the Service, including all
+words you type into the game.
+</p>
+
+<p>
+<b>Limitations On Warranty And Liability</b>
+</p>
+
+<p>
+LABELME AND THE MASSACHUSETTS INSTITUTE OF TECHNOLOGY HAVE NO
+LIABILITY OF ANY KIND OR NATURE IN CONNECTION WITH YOUR USE OF THE
+LABELME SOFTWARE (INCLUDING LIABILITY FOR ANY CONSEQUENTIAL OR
+INCIDENTAL DAMAGES OR DAMAGE TO YOUR COMPUTER HARDWARE OR SOFTWARE),
+AND THE ENTIRE RISK OF USE (INCLUDING WITHOUT LIMITATION ANY DAMAGE TO
+YOUR COMPUTER HARDWARE OR SOFTWARE) RESIDES WITH YOU.
+</p>
+
+<p>
+YOU EXPRESSLY AGREE THAT THE USE OF LABELME AND THE INTERNET IS
+AT YOUR SOLE RISK. LABELME IS PROVIDED ON AN "AS IS" AND "AS
+AVAILABLE" BASIS FOR YOUR USE, WITHOUT WARRANTIES OF ANY KIND, EITHER
+EXPRESS OR IMPLIED, UNLESS SUCH WARRANTIES ARE LEGALLY INCAPABLE OF
+EXCLUSION. LABELME PROVIDES THE SERVICE ON A REASONABLE BASIS
+AND DOES NOT GUARANTEE THAT YOU WILL BE ABLE TO ACCESS OR USE THE
+SERVICE AT TIMES OR LOCATIONS OF YOUR CHOOSING, OR THAT LABELME
+WILL HAVE ADEQUATE CAPACITY FOR THE SERVICE AS A WHOLE OR IN ANY
+SPECIFIC GEOGRAPHIC AREA. 
+</p>
+
+-->
+
+<script type="text/javascript">
+Init();
+</script>
+
+</body>
+
+</html>

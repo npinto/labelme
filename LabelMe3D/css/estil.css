@@ -1,0 +1,42 @@
+/* CSS Document */
+
+a:link, a:visited{
+	color:#000000;
+	text-decoration:none;
+	}
+	
+a:hover{
+color:#ff0000;
+    }	
+
+a.button1:hover{
+color:#0000ff;
+    }	
+
+a.button3:hover{
+color:#00ff00;
+    }	
+
+a.button4:hover{
+color:#ff00ff;
+    }	
+
+a.menu1:hover{
+color:#ffff00;
+    }	
+
+a.menu2:hover{
+color:#ff0000;
+    }	
+
+a.menu3:hover{
+color:#00ff00;
+    }	
+
+a.menu4:hover{
+color:#0000ff;
+    }	
+
+a.menu5:hover{
+color:#ff00ff;
+    }	

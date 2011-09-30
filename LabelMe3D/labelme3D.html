@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+ <LINK REL="SHORTCUT ICON" HREF="Icons/favicon16.ico">
+ <META NAME="KEYWORDS"
+ CONTENT="LabelMe, open annotation tool, images, database, matlab, object">
+ <link rel="stylesheet" type="text/css" href="css/estil.css" />
+
+<title>LabelMe: The open annotation tool</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script language="JavaScript" type="text/JavaScript">
+<!--
+function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+}
+MM_reloadPage(true);
+//-->
+</script>
+</head>
+
+
+
+<body bgcolor="#FFFFFF" style="font-family:Verdana, Arial, Helvetica, sans-serif">
+
+<div id="Layer62" style="position:absolute; left:35px; top:637px; z-index:107; width: 949px; height: 173px; font-size:12px;"> 
+  <p>When you label objects and their location in an image, the tool uses the 
+    labels to build a 3D model of the scene. The tool does not require from you 
+    any knowledge about geometry, as all of the 3D information is automatically 
+    inferred from the annotations. For instance, the tool will know that a 'road' 
+    is a horizontal surface and that a 'car' is supported by the road. The tool 
+    learns to go from 2D to 3D using all the other labels already present in the 
+    database. The more images that are labeled, the better models the tool will 
+    learn.</p>
+  <p><font face="Verdana, Arial, Helvetica, sans-serif">By using this tool, you 
+    can help us build a large collection of annotated images for computer vision 
+    research. Currently, computers have a difficult time recognizing objects in 
+    images. While practical solutions exist for a few simple classes, such as 
+    human faces or cars, the more general problem of recognizing all different 
+    classes of objects in the world (e.g. guitars, bottles, telephones) remains 
+    unsolved. Computer vision researchers are currently investigating methods 
+    that can recognize and localize thousands of different object categories in 
+    complex scenes. A key component of these algorithms is the data used to train 
+    the computer's model of each object.</font></p>
+</div>
+
+<div id="Layer56" style="position:absolute; left:27px; top:14px; width:222px; height:68px; z-index:102"><img src="Icons/LabelMeNEWtight198x55.gif"></div>
+<div id="Layer58" style="position:absolute; left:237px; top:51px; width:380px; height:23px; z-index:104"><strong><font face="Verdana, Arial, Helvetica, sans-serif">now 
+  in 3D!</font></strong></div>
+<div id="Layer59" style="position:absolute; left:34px; top:790px; width:853px; height:38px; z-index:105; border-bottom:2px solid #666666"></div>
+<div id="Layer59" style="position:absolute; left:28px; top:35px; width:1020px; height:38px; z-index:105; border-bottom:2px solid #666666"></div>
+<div id="Layer57" style="position:absolute; left:27px; top:75px; width:940px; height:31px; z-index:103"><font face="Arial, Helvetica, sans-serif"><em>Written 
+  by </em><a href="http://people.csail.mit.edu/brussell">Bryan Russell</a> and <a href="http://web.mit.edu/torralba/www/">Antonio Torralba</a></font></div>
+  
+<div id="Layer0" style="position:absolute; left:33px; bottom:60px; width:976px; height:30px; z-index:63; top: 830px;"> 
+  <p><font size="-2">This work is the result of a collaboration between the <a href="http://www.csail.mit.edu/"><font color="#FF0000">Computer 
+    Science and Artificial Intelligence Laboratory</font></a> at MIT and the INRIA 
+    (<a href="http://www.di.ens.fr/willow/"><font color="#FF0000">Willow project-team</font></a>, 
+    Laboratoire d'Informatique de l'&Eacute;cole Normale Sup&eacute;rieure, ENS/INRIA/CNRS 
+    UMR 8548). Funding for this research was provided by National Science Foundation 
+    Career award (IIS 0747120). </font></p>
+</div>
+
+<div id="Layer62" style="position:absolute; left:126px; top:552px; z-index:107"> 
+  <img src="Icons/button1.png" width="214" height="45" border="0"> 
+  <div id="textbutton1" style="position:absolute; top:9px; left:17px; font-size:24px; color:#000000; width: 213px; height: 27px;"><a href="http://labelme.csail.mit.edu/tool.html" class="button1">Annotation 
+    tool</a> </div>
+</div>
+<div id="Layer63" style="position:absolute; left:412px; top:552px; z-index:107"> 
+  <img src="Icons/button2.PNG" width="214" height="45" border="0"> 
+  <div id="textbutton2" style="position:absolute; top:9px; left:27px; font-size:24px; color:#000000; width: 213px; height: 27px;"><a href="upload3D.html" class="button2">Upload
+    image</a> </div>
+</div>
+<div id="Layer64" style="position:absolute; left:698px; top:550px; z-index:107; width: 237px; height: 49px;"> 
+  <img src="Icons/button3.PNG" width="214" height="45" border="0"> 
+  <div id="textbutton3" style="position:absolute; top:6px; left:26px; font-size:24px; color:#000000; width: 213px; height: 27px;"><a href="description3D.html" class="button3" target="_blank">How 
+    it works?</a> </div>
+</div>
+<div id="Layer61" style="position:absolute; left:382px; top:163px; width:256px; height:336px; z-index:108"><img src="Icons/laredo_label.jpg" width="250" height="332"></div>
+<div id="Layer1" style="position:absolute; left:47px; top:125px; width:214px; height:35px; z-index:109; font-size:12px;"><font size="4" face="Verdana, Arial, Helvetica, sans-serif">Upload 
+  your picture</font></div>
+<div id="Layer2" style="position:absolute; left:383px; top:126px; width:210px; height:34px; z-index:110; font-size:12px; background-color: #FFFFFF; layer-background-color: #FFFFFF; border: 1px none #000000;"> 
+  <p><font size="4" face="Verdana, Arial, Helvetica, sans-serif">Label the objects</font></p>
+</div>
+
+<div id="Layer4" style="position:absolute; left:241px; top:13px; width:51px; height:55px; z-index:112"><img src="Icons/LM3d.png" width="42" height="43"></div>
+
+<!-- Copyright (c)2005 Site Meter -->
+
+<!--WEBBOT bot="HTMLMarkup" Endspan -->
+<div id="Layer60" style="position:absolute; left:35px; top:884px; width:362px; height:30px; z-index:63"> 
+  <!--WEBBOT bot="HTMLMarkup" startspan ALT="Site Meter" -->
+  <script type="text/javascript" language="JavaScript">var site="s21labelme"</script>
+<script type="text/javascript" language="JavaScript1.2" src="http://s21.sitemeter.com/js/counter.js?site=s21labelme"></script>
+<noscript>
+<p><a href="http://s21.sitemeter.com/stats.asp?site=s21labelme" target="_top">
+<img src="http://s21.sitemeter.com/meter.asp?site=s21labelme" alt="Site Meter" border="0"/></a>
+</p></noscript>
+
+</div>
+<div id="Layer5" style="position:absolute; left:758px; top:696px; width:353px; height:182px; z-index:0"><img src="Icons/wireframeSmall.jpg" width="350" height="171"></div>
+<div id="Layer6" style="position:absolute; left:707px; top:137px; width:283px; height:36px; z-index:113"><font size="4">Build 
+  your own pop-up book!</font></div>
+<div id="Layer7" style="position:absolute; left:59px; top:155px; width:246px; height:330px; z-index:114"><img src="Icons/street_espiritu_santo.jpg" width="250" height="333"></div>
+<div id="Layer3" style="position:absolute; left:701px; top:170px; width:293px; height:331px; z-index:116"><img src="Icons/book3D.jpg" width="292" height="330"></div>
+<div id="Layer8" style="position:absolute; left:27px; top:124px; width:39px; height:72px; z-index:117"><img src="Icons/one.png" width="12" height="45"></div>
+<div id="Layer9" style="position:absolute; left:348px; top:126px; width:52px; height:71px; z-index:118"><img src="Icons/two.png" width="26" height="41"></div>
+<div id="Layer10" style="position:absolute; left:669px; top:135px; width:43px; height:60px; z-index:119"><img src="Icons/three.png" width="27" height="40"></div>
+</body>
+</html>
